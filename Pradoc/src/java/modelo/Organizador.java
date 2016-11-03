@@ -14,5 +14,21 @@ import java.util.ArrayList;
 class Organizador {
     private Usuario usuario;
     private ArrayList<Evento> evento;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public ArrayList<Evento> getEvento() {
+        return evento;
+    }
+
+    public void setEvento(ArrayList<Evento> evento) {
+        this.evento = evento;
+    }
     
 }
