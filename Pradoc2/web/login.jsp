@@ -14,7 +14,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form class="form-horizontal">
+        <div class="container">
+        <img src="img/PradocLogo.png" width="10%" height="15%"/>
+        <form class="form-horizontal" method="POST">
             <div class="control-group">
                 <label class="control-label" for="inputEmail">E-mail</label>
                 <div class="controls">
@@ -29,10 +31,10 @@
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <label class="checkbox"><input type="checkbox" /> Lembrar senha</label>
                     <button class="btn" type="submit">Acessar</button>
                 </div>
             </div>
         </form>
+        </div>
     </body>
 </html>
