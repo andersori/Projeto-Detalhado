@@ -5,6 +5,9 @@
  */
 package modelo;
 
+import java.text.Normalizer;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author Anderson
@@ -35,8 +38,13 @@ public class Documento {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public boolean setUsername(String username) {
+        if(username.contains(" ")){
+            return false;
+        }
+        
+        this.username = retirarAcentos(username);
+        return false;
     }
 
     public String getCaminho() {
@@ -44,8 +52,12 @@ public class Documento {
     }
 
     public void setCaminho(String caminho) {
-        this.caminho = caminho;
+        this.caminho = retirarAcentos(caminho);
     }
     
-    
+    private String retirarAcentos(String str) {
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD); 
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
+    }
 }
