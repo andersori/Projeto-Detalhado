@@ -16,4 +16,37 @@ public class Participacao {
     private Documento documento;
     private boolean valido;
     private String status;
+
+    public ArrayList<String> getEmailsUsuarios() {
+        return emailsUsuarios;
+    }
+
+    public void setEmailsUsuarios(String email) {
+        this.emailsUsuarios.add(email);
+    }
+
+    public Documento getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(Documento documento) {
+        this.documento = documento;
+    }
+
+    public boolean isValido() {
+        return valido;
+    }
+
+    public void setValido(boolean valido) {
+        this.valido = valido;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
 }

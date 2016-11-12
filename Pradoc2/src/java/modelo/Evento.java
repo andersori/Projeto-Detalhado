@@ -171,16 +171,16 @@ public class Evento {
         return avaliadores;
     }
 
-    public void setAvaliadores(ArrayList<Avaliador> avaliadores) {
-        this.avaliadores = avaliadores;
+    public void setAvaliadores(Avaliador avaliador) {
+        this.avaliadores.add(avaliador);
     }
 
     public ArrayList<Participacao> getParticipacoes() {
         return participacoes;
     }
 
-    public void setParticipacoes(ArrayList<Participacao> participacoes) {
-        this.participacoes = participacoes;
+    public void setParticipacoes(Participacao participacao) {
+        this.participacoes.add(participacao);
     }
 
     public Documento getModeloDocumento() {

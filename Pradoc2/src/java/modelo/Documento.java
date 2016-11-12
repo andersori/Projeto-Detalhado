@@ -43,7 +43,7 @@ public class Documento {
             return false;
         }
         
-        this.username = retirarAcentos(username);
+        this.username = ValidacaoString.retirarAcentos(username);
         return false;
     }
 
@@ -52,12 +52,7 @@ public class Documento {
     }
 
     public void setCaminho(String caminho) {
-        this.caminho = retirarAcentos(caminho);
+        this.caminho = ValidacaoString.retirarAcentos(caminho);
     }
     
-    private String retirarAcentos(String str) {
-        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD); 
-        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-        return pattern.matcher(nfdNormalizedString).replaceAll("");
-    }
 }
