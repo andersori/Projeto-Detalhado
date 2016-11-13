@@ -26,6 +26,7 @@ public class Usuario {
     }
 
     public void setNome(String nome) {
+        //Não pode ter números
         this.nome = nome;
     }
 
@@ -61,11 +62,11 @@ public class Usuario {
     }
 
     public void setUsername(String username) {
-        //Retirar acentos
+        //Retirar acentos e espaços
         this.username = username;
     }
 
-    public String getSenha() {
+    private String getSenha() {
         return senha;
     }
 
@@ -99,5 +100,21 @@ public class Usuario {
         this.especializacao = especializacao;
     }
 
+    /**
+     * Funções dO USUARIO
+     */
     
+    public ArrayList<Evento> eventosParticipando(){
+        //Requisita a alguma classe do DAO
+        return null;
+    }
+    
+    public boolean fazerLogin(String senha){
+        return getSenha().equals(senha);
+    }
+    
+    public void criarEvento(Evento evento){
+        //Alguma classe da DAO salva isso no banco
+        //associando esse usuário com o evento criado
+    }
 }

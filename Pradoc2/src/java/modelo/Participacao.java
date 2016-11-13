@@ -16,6 +16,7 @@ public class Participacao {
     private Documento documento;
     private boolean valido;
     private String status;
+    private int conceito;
 
     public ArrayList<String> getEmailsUsuarios() {
         return emailsUsuarios;
@@ -48,5 +49,26 @@ public class Participacao {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public int getConceito() {
+        return conceito;
+    }
+
+    public void setConceito(int conceito) {
+        this.conceito = conceito;
+    }
     
+    
+    
+    /**
+     * Funções da PARTICIPACAO
+     */
+    
+    public boolean requisitarRevisao(){
+        return true;
+    }
+    
+    public void visualizarResultado(){
+        //visualizar conceito e uma descrição da avaliacao
+    }
 }

@@ -5,9 +5,6 @@
  */
 package modelo;
 
-import java.text.Normalizer;
-import java.util.regex.Pattern;
-
 /**
  *
  * @author Anderson
@@ -54,5 +51,6 @@ public class Documento {
     public void setCaminho(String caminho) {
         this.caminho = ValidacaoString.retirarAcentos(caminho);
     }
+    
     
 }
