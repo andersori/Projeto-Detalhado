@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Avaliador {
     private Usuario usuario;
-    private ArrayList<Documento> documentos;
+    private ArrayList<Participacao> participacoes;
 
     public Usuario getUsuario() {
         return usuario;
@@ -23,21 +23,39 @@ public class Avaliador {
         this.usuario = usuario;
     }
 
-    public Documento getDocumentos(int idDoc) {
-        Documento doc = null;
-        
-        for(int i = 0; i < documentos.size(); i++){
-            if(documentos.get(i).getId() == idDoc){
-                doc = documentos.get(i);
-                break;
-            }
-        }
-        
-        return doc;
+    public ArrayList<Participacao> getParticipacoes() {
+        return participacoes;
     }
 
-    public void setDocumentos(Documento doc) {
-        documentos.add(doc);
+    public void setParticipacoes(Participacao participacao) {
+        this.participacoes.add(participacao);
+    }
+
+    
+    /**
+     * Funções de uma AVALIADOR
+     */
+    
+    public boolean avaliar(int id_participacao){
+        //Não entendi o que ele deve fazer
+        
+        return true;
     }
     
+    public boolean definirConceito(int id_participacao){
+        //Para determinar o conceito é so acessar um evento especifico
+        //depois uma participação especifica.
+        
+        return true;
+    }
+    
+    public Documento baixarDocumento(int id_participacao){
+        //Requisitar a uma participacao de um evento
+        return null;
+    }
+    
+    public ArrayList<Documento> documentosParaAvaliar(){
+        //Requisitar as participacoes de um evento
+        return null;
+    }
 }
