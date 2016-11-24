@@ -26,7 +26,11 @@ public class Usuario {
     }
 
     public void setNome(String nome) {
-        //Não pode ter números
+        if(!ValidacaoString.isNome(nome)){
+            //O que deve ser feito?
+        }
+        
+        //Se não encontrou é so setar
         this.nome = nome;
     }
 
@@ -35,7 +39,14 @@ public class Usuario {
     }
 
     public void setTelefone(String telefone) {
-        //Validar a quantidade e formatar o numero
+        if(!ValidacaoString.isTelefone(telefone)){
+            //O que deve ser feito?
+        }
+        
+        //Validar a quantidade
+        
+        //Formatar o numero
+        
         this.telefone = telefone;
     }
 
@@ -44,7 +55,10 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
-        //Validar o email
+        if(!ValidacaoString.isEmail(email)){
+            //O que deve ser feito
+        }
+        
         this.email = email;
     }
 
@@ -53,7 +67,10 @@ public class Usuario {
     }
 
     public void setCpf(String cpf) {
-        //Validar CPF
+        if(!ValidacaoString.isCPF(cpf)){
+            //O que deve ser feito?
+        }
+        
         this.cpf = cpf;
     }
 
@@ -62,7 +79,9 @@ public class Usuario {
     }
 
     public void setUsername(String username) {
-        //Retirar acentos e espaços
+        if(!ValidacaoString.isUsernme(username)){
+            //O que deve ser feito?
+        }
         this.username = username;
     }
 
