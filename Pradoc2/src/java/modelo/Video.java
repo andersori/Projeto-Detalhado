@@ -9,6 +9,6 @@ package modelo;
  *
  * @author Anderson
  */
-public class Documento {
-    private String endereco;
+public class Video {
+    private String url;
 }

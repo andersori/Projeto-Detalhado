@@ -30,10 +30,7 @@ public class Organizador {
     public void setEventos(Evento evento) {
         this.eventos.add(evento);
     }
-    
-    /**
-     * Funções do ORGANZADOR
-     */
+
     
     public boolean excluirEvento(int id_evento){
         return true;

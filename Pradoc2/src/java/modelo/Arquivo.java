@@ -9,6 +9,8 @@ package modelo;
  *
  * @author Anderson
  */
-public class Documento {
-    private String endereco;
+public abstract class Arquivo {
+    private int id;
+    private int codigoEvento;
+    private String username;
 }

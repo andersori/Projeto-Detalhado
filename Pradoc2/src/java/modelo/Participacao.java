@@ -12,26 +12,36 @@ import java.util.ArrayList;
  * @author Anderson
  */
 public class Participacao {
+    private int id;
     private ArrayList<String> emailsUsuarios;
-    private Documento documento;
+    private ArrayList<Arquivo> arquivos;
     private boolean valido;
     private String status;
-    private int conceito;
+    private float resultadoFinal;
+    private ArrayList<Avaliacao> avaliacoes;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public ArrayList<String> getEmailsUsuarios() {
         return emailsUsuarios;
     }
 
-    public void setEmailsUsuarios(String email) {
-        this.emailsUsuarios.add(email);
+    public void setEmailsUsuarios(ArrayList<String> emailsUsuarios) {
+        this.emailsUsuarios = emailsUsuarios;
     }
 
-    public Documento getDocumento() {
-        return documento;
+    public ArrayList<Arquivo> getArquivos() {
+        return arquivos;
     }
 
-    public void setDocumento(Documento documento) {
-        this.documento = documento;
+    public void setArquivos(ArrayList<Arquivo> arquivos) {
+        this.arquivos = arquivos;
     }
 
     public boolean isValido() {
@@ -50,13 +60,22 @@ public class Participacao {
         this.status = status;
     }
 
-    public int getConceito() {
-        return conceito;
+    public float getResultadoFinal() {
+        return resultadoFinal;
     }
 
-    public void setConceito(int conceito) {
-        this.conceito = conceito;
+    public void setResultadoFinal(float resultadoFinal) {
+        this.resultadoFinal = resultadoFinal;
     }
+
+    public ArrayList<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(ArrayList<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
     
     
     

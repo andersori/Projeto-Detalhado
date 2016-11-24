@@ -49,12 +49,12 @@ public class Avaliador {
         return true;
     }
     
-    public Documento baixarDocumento(int id_participacao){
+    public Arquivo baixarDocumento(int id_participacao){
         //Requisitar a uma participacao de um evento
         return null;
     }
     
-    public ArrayList<Documento> documentosParaAvaliar(){
+    public ArrayList<Arquivo> documentosParaAvaliar(){
         //Requisitar as participacoes de um evento
         return null;
     }

@@ -5,10 +5,15 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Anderson
  */
-public class Documento {
-    private String endereco;
+public class Avaliacao {
+    private ArrayList<Competencia> conceitos;
+    private float notaFinal;
+    private float valorObitido;
+    private String observacao;
 }

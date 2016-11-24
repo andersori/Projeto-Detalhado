@@ -26,7 +26,8 @@ public class Evento {
     private Organizador organizador;
     private ArrayList<Avaliador> avaliadores;
     private ArrayList<Participacao> participacoes;
-    private Documento modeloDocumento;
+    private Arquivo modeloDocumento;
+    private int maxParticipantes;
 
     public int getCodigo() {    //V
         return codigo;
@@ -183,11 +184,11 @@ public class Evento {
         this.participacoes.add(participacao);
     }
 
-    public Documento getModeloDocumento() {
+    public Arquivo getModeloDocumento() {
         return modeloDocumento;
     }
 
-    public void setModeloDocumento(Documento modeloDocumento) {
+    public void setModeloDocumento(Arquivo modeloDocumento) {
         this.modeloDocumento = modeloDocumento;
     }
     

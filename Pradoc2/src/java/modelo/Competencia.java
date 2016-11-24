@@ -9,6 +9,9 @@ package modelo;
  *
  * @author Anderson
  */
-public class Documento {
-    private String endereco;
+public class Competencia {
+    private String titulo;
+    private float valorMax;
+    private float peso;
+    private String descricao;
 }
