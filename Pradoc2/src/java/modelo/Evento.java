@@ -5,8 +5,8 @@
  */
 package modelo;
 
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  *
@@ -15,7 +15,7 @@ import java.util.Calendar;
 public class Evento {
     private int codigo;
     private String nome;
-    private ArrayList<String> areaConhecimento;
+    private List<String> areaConhecimento;
     private Calendar inicioSubmicao;
     private Calendar fimSubmicao;
     private Calendar inicioAvaliacao;
@@ -24,8 +24,8 @@ public class Evento {
     private Calendar fimRecurso;
     private String instituicao;
     private Organizador organizador;
-    private ArrayList<Avaliador> avaliadores;
-    private ArrayList<Participacao> participacoes;
+    private List<Avaliador> avaliadores;
+    private List<Participacao> participacoes;
     private Arquivo modeloDocumento;
     private int maxParticipantes;
 
@@ -47,12 +47,12 @@ public class Evento {
         this.nome = nome;
     }
 
-    public ArrayList<String> getAreaConhecimento() {    //V
+    public List<String> getAreaConhecimento() {    //V
         return areaConhecimento;
     }
 
-    public void setAreaConhecimento(String areaConhecimento) {  //V
-        this.areaConhecimento.add(areaConhecimento);
+    public void setAreaConhecimento(List<String> areaConhecimento) {  //V
+        this.areaConhecimento= areaConhecimento;
     }
 
     public Calendar getInicioSubmicao() {   //V  
@@ -168,20 +168,20 @@ public class Evento {
         this.organizador = organizador;
     }
 
-    public ArrayList<Avaliador> getAvaliadores() {
+    public List<Avaliador> getAvaliadores() {
         return avaliadores;
     }
 
-    public void setAvaliadores(Avaliador avaliador) {
-        this.avaliadores.add(avaliador);
+    public void setAvaliadores(List<Avaliador> avaliadores) {
+        this.avaliadores = avaliadores;
     }
 
-    public ArrayList<Participacao> getParticipacoes() {
+    public List<Participacao> getParticipacoes() {
         return participacoes;
     }
 
-    public void setParticipacoes(Participacao participacao) {
-        this.participacoes.add(participacao);
+    public void setParticipacoes(List<Participacao> participacoes) {
+        this.participacoes = participacoes;
     }
 
     public Arquivo getModeloDocumento() {

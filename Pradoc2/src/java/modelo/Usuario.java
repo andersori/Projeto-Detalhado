@@ -5,22 +5,30 @@
  */
 package modelo;
 
-import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Anderson
  */
 public class Usuario {
+    private int id;
     private String nome;
     private String telefone;
     private String email;
     private String cpf;
     private String username;
     private String senha;
-    private String caminhoImagem;
     private String instituicaoDeEnsino;
-    private ArrayList<String> especializacao;
+    private List<String> especializacao;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -85,22 +93,13 @@ public class Usuario {
         this.username = username;
     }
 
-    private String getSenha() {
+    public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
         //Verificação de quantidade minima de digitos
         this.senha = senha;
-    }
-
-    public String getCaminhoImagem() {
-        return caminhoImagem;
-    }
-
-    public void setCaminhoImagem(String caminhoImagem) {
-        //Retirar acentos
-        this.caminhoImagem = caminhoImagem;
     }
 
     public String getInstituicaoDeEnsino() {
@@ -111,11 +110,11 @@ public class Usuario {
         this.instituicaoDeEnsino = instituicaoDeEnsino;
     }
 
-    public ArrayList<String> getEspecializacao() {
+    public List<String> getEspecializacao() {
         return especializacao;
     }
 
-    public void setEspecializacao(ArrayList<String> especializacao) {
+    public void setEspecializacao(List<String> especializacao) {
         this.especializacao = especializacao;
     }
 
@@ -123,7 +122,7 @@ public class Usuario {
      * Funções dO USUARIO
      */
     
-    public ArrayList<Evento> eventosParticipando(){
+    public List<Evento> eventosParticipando(){
         //Requisita a alguma classe do DAO
         return null;
     }

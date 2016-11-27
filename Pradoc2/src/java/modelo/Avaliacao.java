@@ -5,14 +5,14 @@
  */
 package modelo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Anderson
  */
 public class Avaliacao {
-    private ArrayList<Competencia> conceitos;
+    private List<Competencia> conceitos;
     private float notaFinal;
     private float valorObitido;
     private String observacao;

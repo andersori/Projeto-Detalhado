@@ -5,7 +5,7 @@
  */
 package modelo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Avaliador {
     private Usuario usuario;
-    private ArrayList<Participacao> participacoes;
+    private List<Participacao> participacoes;
 
     public Usuario getUsuario() {
         return usuario;
@@ -23,12 +23,12 @@ public class Avaliador {
         this.usuario = usuario;
     }
 
-    public ArrayList<Participacao> getParticipacoes() {
+    public List<Participacao> getParticipacoes() {
         return participacoes;
     }
 
-    public void setParticipacoes(Participacao participacao) {
-        this.participacoes.add(participacao);
+    public void setParticipacoes(List<Participacao> participacoes) {
+        this.participacoes = participacoes;
     }
 
     
@@ -54,7 +54,7 @@ public class Avaliador {
         return null;
     }
     
-    public ArrayList<Arquivo> documentosParaAvaliar(){
+    public List<Arquivo> documentosParaAvaliar(){
         //Requisitar as participacoes de um evento
         return null;
     }

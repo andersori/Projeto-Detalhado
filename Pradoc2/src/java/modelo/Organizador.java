@@ -5,7 +5,7 @@
  */
 package modelo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Organizador {
     private Usuario usuario;
-    private ArrayList<Evento> eventos;
+    private List<Evento> eventos;
 
     public Usuario getUsuario() {
         return usuario;
@@ -23,12 +23,12 @@ public class Organizador {
         this.usuario = usuario;
     }
 
-    public ArrayList<Evento> getEventos() {
+    public List<Evento> getEventos() {
         return eventos;
     }
 
-    public void setEventos(Evento evento) {
-        this.eventos.add(evento);
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
     }
 
     

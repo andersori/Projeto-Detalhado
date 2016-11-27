@@ -5,7 +5,8 @@
  */
 package modelo;
 
-import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  *
@@ -13,12 +14,12 @@ import java.util.ArrayList;
  */
 public class Participacao {
     private int id;
-    private ArrayList<String> emailsUsuarios;
-    private ArrayList<Arquivo> arquivos;
+    private List<String> emailsUsuarios;
+    private List<Arquivo> arquivos;
     private boolean valido;
     private String status;
     private float resultadoFinal;
-    private ArrayList<Avaliacao> avaliacoes;
+    private List<Avaliacao> avaliacoes;
 
     public int getId() {
         return id;
@@ -28,19 +29,19 @@ public class Participacao {
         this.id = id;
     }
 
-    public ArrayList<String> getEmailsUsuarios() {
+    public List<String> getEmailsUsuarios() {
         return emailsUsuarios;
     }
 
-    public void setEmailsUsuarios(ArrayList<String> emailsUsuarios) {
+    public void setEmailsUsuarios(List<String> emailsUsuarios) {
         this.emailsUsuarios = emailsUsuarios;
     }
 
-    public ArrayList<Arquivo> getArquivos() {
+    public List<Arquivo> getArquivos() {
         return arquivos;
     }
 
-    public void setArquivos(ArrayList<Arquivo> arquivos) {
+    public void setArquivos(List<Arquivo> arquivos) {
         this.arquivos = arquivos;
     }
 
@@ -68,11 +69,11 @@ public class Participacao {
         this.resultadoFinal = resultadoFinal;
     }
 
-    public ArrayList<Avaliacao> getAvaliacoes() {
+    public List<Avaliacao> getAvaliacoes() {
         return avaliacoes;
     }
 
-    public void setAvaliacoes(ArrayList<Avaliacao> avaliacoes) {
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
         this.avaliacoes = avaliacoes;
     }
 
