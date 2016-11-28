@@ -65,6 +65,7 @@ public class UsuarioDAO {
                 user.setSenha(rs.getString("senha"));
                 user.setTelefone(rs.getString("telefone"));
                 user.setUsername(rs.getString("username"));
+                user.setId(rs.getInt("id_usuario"));
                 
                 usuarios.add(user);
             }
@@ -85,7 +86,9 @@ public class UsuarioDAO {
         Usuario user = null;
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM usuario WHERE username = '?'");
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE username = ?");
+            stmt.setString(1, username);
+            
             rs = stmt.executeQuery();
             if(rs.next()){
                 user = new Usuario();
@@ -97,6 +100,7 @@ public class UsuarioDAO {
                 user.setSenha(rs.getString("senha"));
                 user.setTelefone(rs.getString("telefone"));
                 user.setUsername(rs.getString("username"));
+                user.setId(rs.getInt("id_usuario"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,7 +117,7 @@ public class UsuarioDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("UPDATE usuario SET username = ?, senha = ?, nome = ?, telefone = ?, email = ?, cpf = ?, instituicao_de_ensino = ? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE usuario SET username = ?, senha = ?, nome = ?, telefone = ?, email = ?, cpf = ?, instituicao_de_ensino = ? WHERE id_usuario = ?");
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getSenha());
             stmt.setString(3, user.getNome());

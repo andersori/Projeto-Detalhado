@@ -33,17 +33,12 @@ public class TesteDeConexao {
         */
         
         /*  Teste de Update - TA FUNCIONANDO
-        Usuario user = new Usuario();
-        user.setCpf("77437022354");
-        user.setEmail("user@email.com");
-        user.setInstituicaoDeEnsino("Universidade Federal do Ceará");
-        user.setNome("Anderson Soriano de Araújo");
-        user.setSenha("1234");
-        user.setTelefone("123456789");
-        user.setUsername("andersori");
-        
         UsuarioDAO userDao = new UsuarioDAO();
-        userDao.update(user);
+        Usuario user = userDao.selectUsername("andersori"); //Buscando as informações do usuario "andersori"
+        
+        user.setInstituicaoDeEnsino("Univercidade Federal do Ceará");   //Modificando sua instituição de ensino
+        
+        userDao.update(user);   //Realizando o update
         */
     }
 }
