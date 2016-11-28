@@ -10,10 +10,19 @@ package modelo;
  * @author Anderson
  */
 public class Competencia {
+    private int id;
     private String titulo;
-    private float valorMax;
-    private float peso;
+    private double valorMax;
+    private int peso;
     private String descricao;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -23,19 +32,19 @@ public class Competencia {
         this.titulo = titulo;
     }
 
-    public float getValorMax() {
+    public double getValorMax() {
         return valorMax;
     }
 
-    public void setValorMax(float valorMax) {
+    public void setValorMax(double valorMax) {
         this.valorMax = valorMax;
     }
 
-    public float getPeso() {
+    public int getPeso() {
         return peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(int peso) {
         this.peso = peso;
     }
 

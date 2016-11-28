@@ -31,7 +31,7 @@ public class CompetenciaDAO {
             
             stmt.setInt(1, evento.getCodigo());
             stmt.setString(2, competencia.getDescricao());
-            stmt.setFloat(3, competencia.getValorMax());
+            stmt.setDouble(3, competencia.getValorMax());
             stmt.setInt(4, competencia.getPeso());
             stmt.setString(5, competencia.getTitulo());
             
@@ -59,9 +59,9 @@ public class CompetenciaDAO {
                 
                 competencia.setDescricao(rs.getString("descicao"));
                 competencia.setPeso(rs.getInt("peso"));
-                competencia.setValorMax(rs.getFloat("valor_max"));
+                competencia.setValorMax(rs.getDouble("valor_max"));
                 competencia.setTitulo(rs.getString("titulo"));
-                
+                competencia.setId(rs.getInt("id_competencia"));
                 competencias.add(competencia);
             }
         } catch (SQLException ex) {
@@ -89,13 +89,11 @@ public class CompetenciaDAO {
             if(rs.next()){
                 Competencia competencia = new Competencia();
                 
-                competencia = new Competencia();
-                
                 competencia.setDescricao(rs.getString("descicao"));
                 competencia.setPeso(rs.getInt("peso"));
-                competencia.setValorMax(rs.getFloat("valor_max"));
+                competencia.setValorMax(rs.getDouble("valor_max"));
                 competencia.setTitulo(rs.getString("titulo"));
-                
+                competencia.setId(rs.getInt("id_competencia"));
                 competencias.add(competencia);
             }
          
@@ -126,8 +124,9 @@ public class CompetenciaDAO {
                 
                 competencia.setDescricao(rs.getString("descicao"));
                 competencia.setPeso(rs.getInt("peso"));
-                competencia.setValorMax(rs.getFloat("valor_max"));
+                competencia.setValorMax(rs.getDouble("valor_max"));
                 competencia.setTitulo(rs.getString("titulo"));
+                competencia.setId(rs.getInt("id_competencia"));
             }
          
         } catch (SQLException ex) {
@@ -148,7 +147,7 @@ public class CompetenciaDAO {
             
             stmt.setInt(1, evento.getCodigo());
             stmt.setString(2, competencia.getDescricao());
-            stmt.setFloat(3, competencia.getValorMax());
+            stmt.setDouble(3, competencia.getValorMax());
             stmt.setInt(4, competencia.getPeso());
             stmt.setString(5, competencia.getTitulo());
             stmt.setInt(6, competencia.getId());
