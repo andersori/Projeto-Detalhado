@@ -12,11 +12,20 @@ import java.util.List;
  * @author Anderson
  */
 public class Avaliacao {
+    private int id;
     private List<Competencia> conceitos;
     private float notaFinal;
     private float valorObitido;
     private String observacao;
+    
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public List<Competencia> getConceitos() {
         return conceitos;
     }

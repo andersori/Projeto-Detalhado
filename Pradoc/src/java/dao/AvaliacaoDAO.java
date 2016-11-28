@@ -28,7 +28,7 @@ public class AvaliacaoDAO {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt=con.prepareStatement("INSERT INTO avaliacao(conceitos, notaFinal, valorObtido, observacao) VALUES (?, ?, ?, ?)");
+            stmt=con.prepareStatement("INSERT INTO avaliacao(conceitos, notaFinal, valorObtido, observacao,id_competencia, id_participacao,id_usuario,) VALUES (?, ?, ?, ?)");
             stmt.setArray(1, (Array) av.getConceitos());
             stmt.setFloat(2, av.getNotaFinal());
             stmt.setFloat(3, av.getValorObitido());
@@ -84,9 +84,43 @@ public class AvaliacaoDAO {
         }
         
     }
-   /* public void delete(Avaliacao av){
+    public void delete(Avaliacao av){
         Connection con=ConnectionFactory.getConnection();
         PreparedStatement stmt=null;
-        stmt=con.prepareStatement("DELETE FROM avaliacao WHERE ")
-    }*/
+         
+        try {
+            stmt=con.prepareStatement("DELETE FROM avaliacao WHERE id=?");
+            stmt.setInt(1, av.getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AvaliacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    public Avaliacao select(int id){
+        Connection con=ConnectionFactory.getConnection();
+        PreparedStatement stmt=null;
+        ResultSet rs=null;
+        Avaliacao av=null;
+        try {
+            stmt=con.prepareStatement("SELECT *FROM avaliacao WHERE id=?");
+            stmt.setInt(1, id);
+            rs=stmt.executeQuery();
+            
+            if(rs.next()){
+                av=new Avaliacao();
+                av.setConceitos((List<Competencia>) rs.getArray("conceitos"));
+                av.setNotaFinal(rs.getFloat("notaFinal"));
+                av.setValorObitido(rs.getFloat("valorObtido"));
+                av.setObservacao(rs.getString("observacao"));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AvaliacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            ConnectionFactory.closeConnection(con,stmt,rs);
+        }
+        return av;        
+    }
 }
