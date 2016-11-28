@@ -37,6 +37,7 @@ public class UsuarioDAO {
             stmt.setString(6, user.getCpf());
             stmt.setString(7, user.getInstituicaoDeEnsino());
             
+            
             stmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);

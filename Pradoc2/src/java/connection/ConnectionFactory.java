@@ -21,9 +21,9 @@ public class ConnectionFactory {
     
     
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost::3306/banco_pradoc";
+    private static final String URL = "jdbc:mysql://localhost:3306/banco_pradoc";
     private static final String USER = "root";
-    private static final String PASSAWORD = "1234";
+    private static final String PASSAWORD = "fdro196245";
     
     
     public static Connection getConnection(){
