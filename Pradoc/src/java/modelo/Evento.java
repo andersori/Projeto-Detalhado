@@ -13,7 +13,7 @@ import java.util.List;
  * @author Anderson
  */
 public class Evento {
-    private int codigo;
+    private int id;
     private String nome;
     private List<String> areaConhecimento;
     private Calendar inicioSubmicao;
@@ -29,12 +29,20 @@ public class Evento {
     private Arquivo modeloDocumento;
     private int maxParticipantes;
 
-    public int getCodigo() {    //V
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) { //V
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getMaxParticipantes() {
+        return maxParticipantes;
+    }
+
+    public void setMaxParticipantes(int maxParticipantes) {
+        this.maxParticipantes = maxParticipantes;
     }
 
     public String getNome() {   //V

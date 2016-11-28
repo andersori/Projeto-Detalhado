@@ -112,6 +112,38 @@ public class UsuarioDAO {
         return user;
         
     }
+    public Usuario selectId(int id){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Usuario user = null;
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE id_usuario = ?");
+            stmt.setInt(1, id);
+            
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                user = new Usuario();
+                
+                user.setCpf(rs.getString("cpf"));
+                user.setEmail(rs.getString("email"));
+                user.setInstituicaoDeEnsino(rs.getString("instituicao_de_ensino"));
+                user.setNome(rs.getString("nome"));
+                user.setSenha(rs.getString("senha"));
+                user.setTelefone(rs.getString("telefone"));
+                user.setUsername(rs.getString("username"));
+                user.setId(rs.getInt("id_usuario"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return user;
+        
+    }
     
     public void update(Usuario user){
         Connection con = ConnectionFactory.getConnection();
