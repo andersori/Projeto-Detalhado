@@ -21,9 +21,9 @@ public class ConnectionFactory {
     
     
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost::3306/banco_pradoc";
-    private static final String USER = "root";
-    private static final String PASSAWORD = "1234";
+    private static final String URL = "jdbc:mysql://localhost:3306/banco_pradoc?autoReconnect=true&useSSL=false";
+    private static final String USER = "adm_pradoc";
+    private static final String PASSAWORD = "senhaDoAdm";
     
     
     public static Connection getConnection(){
@@ -32,8 +32,12 @@ public class ConnectionFactory {
             
             return DriverManager.getConnection(URL, USER, PASSAWORD);
             
-        } catch (ClassNotFoundException | SQLException ex) {
-            throw new RuntimeException("Erro na conexão");
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro SQLException na conexão na Classe ConnectionFactory", ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
+            throw new RuntimeException("Erro ClassNotFoundException na conexão na Classe ConnectionFactory", ex);
         }
     }
     

@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package br.com.TestePradoc;
-import br.com.ConexaoBanco.*;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import connection.ConnectionFactory;
+import dao.UsuarioDAO;
+import java.sql.Connection;
+import modelo.Usuario;
 
 /**
  *
@@ -15,80 +16,34 @@ import java.util.Scanner;
 public class TesteDeConexao {
     
     public static void main(String[] args){
+        ConnectionFactory.getConnection();
         
+        /*  Teste de Inserção - TA FUNCIONANDO
+        Usuario user = new Usuario();
+        user.setCpf("77437022354");
+        user.setEmail("user@email.com");
+        user.setInstituicaoDeEnsino("Unopar");
+        user.setNome("Anderson Soriano de Araújo");
+        user.setSenha("1234");
+        user.setTelefone("123456789");
+        user.setUsername("andersori");
         
-        String c = "andérson soriandeo";
+        UsuarioDAO userDao = new UsuarioDAO();
+        userDao.insert(user);
+        */
         
-        if(!c.matches("[a-zA-Z0-9]+")){
-            System.out.println("tem acentos");
-        }
+        /*  Teste de Update - TA FUNCIONANDO
+        Usuario user = new Usuario();
+        user.setCpf("77437022354");
+        user.setEmail("user@email.com");
+        user.setInstituicaoDeEnsino("Universidade Federal do Ceará");
+        user.setNome("Anderson Soriano de Araújo");
+        user.setSenha("1234");
+        user.setTelefone("123456789");
+        user.setUsername("andersori");
         
-      
-        
-        //System.out.println("Status antes de conectar: " + ConexaoMySQL.statusConection() + ".");
-        
-        //ConexaoMySQL.getConexaoSQL();
-        
-        //System.out.println("Status depois de conectar: " + ConexaoMySQL.statusConection() + ".");
-    }
-    
-    public static boolean isCPF(String CPF) {
-    // considera-se erro CPF's formados por uma sequencia de numeros iguais
-        if (CPF.equals("00000000000") || CPF.equals("11111111111") ||
-            CPF.equals("22222222222") || CPF.equals("33333333333") ||
-            CPF.equals("44444444444") || CPF.equals("55555555555") ||
-            CPF.equals("66666666666") || CPF.equals("77777777777") ||
-            CPF.equals("88888888888") || CPF.equals("99999999999") ||
-           (CPF.length() != 11))
-           return(false);
-
-        char dig10, dig11;
-        int sm, i, r, num, peso;
-
-    // "try" - protege o codigo para eventuais erros de conversao de tipo (int)
-        try {
-    // Calculo do 1o. Digito Verificador
-            sm = 0;
-            peso = 10;
-            for (i=0; i<9; i++) {              
-    // converte o i-esimo caractere do CPF em um numero:
-    // por exemplo, transforma o caractere '0' no inteiro 0         
-    // (48 eh a posicao de '0' na tabela ASCII)         
-                num = (int)(CPF.charAt(i) - 48); 
-                sm = sm + (num * peso);
-                peso = peso - 1;
-            }
-
-            r = 11 - (sm % 11);
-            if ((r == 10) || (r == 11))
-                dig10 = '0';
-            else dig10 = (char)(r + 48); // converte no respectivo caractere numerico
-
-    // Calculo do 2o. Digito Verificador
-            sm = 0;
-            peso = 11;
-            for(i=0; i<10; i++) {
-                num = (int)(CPF.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso - 1;
-            }
-
-            r = 11 - (sm % 11);
-            if ((r == 10) || (r == 11))
-                dig11 = '0';
-            else dig11 = (char)(r + 48);
-
-    // Verifica se os digitos calculados conferem com os digitos informados.
-            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
-                return(true);
-            else return(false);
-            } catch (InputMismatchException erro) {
-                return(false);
-            }
-      }
-    
-    public static String imprimeCPF(String CPF) {
-        return(CPF.substring(0, 3) + "." + CPF.substring(3, 6) + "." +
-        CPF.substring(6, 9) + "-" + CPF.substring(9, 11));
+        UsuarioDAO userDao = new UsuarioDAO();
+        userDao.update(user);
+        */
     }
 }
