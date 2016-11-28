@@ -5,33 +5,44 @@
  */
 package modelo;
 
-import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  *
  * @author Anderson
  */
-class Participacao {
-    
-    private ArrayList<String> emailsUsuarios;
-    private Documento documento;
+public class Participacao {
+    private int id;
+    private List<String> emailsUsuarios;
+    private List<Arquivo> arquivos;
     private boolean valido;
     private String status;
+    private float resultadoFinal;
+    private List<Avaliacao> avaliacoes;
 
-    public ArrayList<String> getEmailsUsuarios() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<String> getEmailsUsuarios() {
         return emailsUsuarios;
     }
 
-    public void setEmailsUsuarios(ArrayList<String> emailsUsuarios) {
+    public void setEmailsUsuarios(List<String> emailsUsuarios) {
         this.emailsUsuarios = emailsUsuarios;
     }
 
-    public Documento getDocumento() {
-        return documento;
+    public List<Arquivo> getArquivos() {
+        return arquivos;
     }
 
-    public void setDocumento(Documento documento) {
-        this.documento = documento;
+    public void setArquivos(List<Arquivo> arquivos) {
+        this.arquivos = arquivos;
     }
 
     public boolean isValido() {
@@ -49,5 +60,35 @@ class Participacao {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public float getResultadoFinal() {
+        return resultadoFinal;
+    }
+
+    public void setResultadoFinal(float resultadoFinal) {
+        this.resultadoFinal = resultadoFinal;
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
     
+    
+    
+    /**
+     * Funções da PARTICIPACAO
+     */
+    
+    public boolean requisitarRevisao(){
+        return true;
+    }
+    
+    public void visualizarResultado(){
+        //visualizar conceito e uma descrição da avaliacao
+    }
 }

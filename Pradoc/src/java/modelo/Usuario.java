@@ -5,28 +5,40 @@
  */
 package modelo;
 
-import java.util.ArrayList;
-
+import java.util.List;
 /**
  *
  * @author Anderson
  */
 public class Usuario {
+    private int id;
     private String nome;
     private String telefone;
     private String email;
     private String cpf;
     private String username;
     private String senha;
-    private String caminhoImagem;
     private String instituicaoDeEnsino;
-    private ArrayList<String> especializacao;
+    private List<String> especializacao;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
+        if(!ValidacaoString.isNome(nome)){
+            //O que deve ser feito?
+        }
+        
+        //Se não encontrou é so setar
         this.nome = nome;
     }
 
@@ -35,6 +47,14 @@ public class Usuario {
     }
 
     public void setTelefone(String telefone) {
+        if(!ValidacaoString.isTelefone(telefone)){
+            //O que deve ser feito?
+        }
+        
+        //Validar a quantidade
+        
+        //Formatar o numero
+        
         this.telefone = telefone;
     }
 
@@ -43,6 +63,10 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
+        if(!ValidacaoString.isEmail(email)){
+            //O que deve ser feito
+        }
+        
         this.email = email;
     }
 
@@ -51,6 +75,10 @@ public class Usuario {
     }
 
     public void setCpf(String cpf) {
+        if(!ValidacaoString.isCPF(cpf)){
+            //O que deve ser feito?
+        }
+        
         this.cpf = cpf;
     }
 
@@ -59,6 +87,9 @@ public class Usuario {
     }
 
     public void setUsername(String username) {
+        if(!ValidacaoString.isUsernme(username)){
+            //O que deve ser feito?
+        }
         this.username = username;
     }
 
@@ -67,15 +98,8 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
+        //Verificação de quantidade minima de digitos
         this.senha = senha;
-    }
-
-    public String getCaminhoImagem() {
-        return caminhoImagem;
-    }
-
-    public void setCaminhoImagem(String caminhoImagem) {
-        this.caminhoImagem = caminhoImagem;
     }
 
     public String getInstituicaoDeEnsino() {
@@ -86,13 +110,29 @@ public class Usuario {
         this.instituicaoDeEnsino = instituicaoDeEnsino;
     }
 
-    public ArrayList<String> getEspecializacao() {
+    public List<String> getEspecializacao() {
         return especializacao;
     }
 
-    public void setEspecializacao(ArrayList<String> especializacao) {
+    public void setEspecializacao(List<String> especializacao) {
         this.especializacao = especializacao;
     }
+
+    /**
+     * Funções dO USUARIO
+     */
     
+    public List<Evento> eventosParticipando(){
+        //Requisita a alguma classe do DAO
+        return null;
+    }
     
+    public boolean fazerLogin(String senha){
+        return getSenha().equals(senha);
+    }
+    
+    public void criarEvento(Evento evento){
+        //Alguma classe da DAO salva isso no banco
+        //associando esse usuário com o evento criado
+    }
 }

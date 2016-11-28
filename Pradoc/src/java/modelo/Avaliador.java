@@ -5,15 +5,15 @@
  */
 package modelo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Anderson
  */
-class Avaliador {
+public class Avaliador {
     private Usuario usuario;
-    private ArrayList<Documento> documentos;
+    private List<Participacao> participacoes;
 
     public Usuario getUsuario() {
         return usuario;
@@ -23,12 +23,39 @@ class Avaliador {
         this.usuario = usuario;
     }
 
-    public ArrayList<Documento> getDocumentos() {
-        return documentos;
+    public List<Participacao> getParticipacoes() {
+        return participacoes;
     }
 
-    public void setDocumentos(ArrayList<Documento> documentos) {
-        this.documentos = documentos;
+    public void setParticipacoes(List<Participacao> participacoes) {
+        this.participacoes = participacoes;
+    }
+
+    
+    /**
+     * Funções de uma AVALIADOR
+     */
+    
+    public boolean avaliar(int id_participacao){
+        //Não entendi o que ele deve fazer
+        
+        return true;
     }
     
+    public boolean definirConceito(int id_participacao){
+        //Para determinar o conceito é so acessar um evento especifico
+        //depois uma participação especifica.
+        
+        return true;
+    }
+    
+    public Arquivo baixarDocumento(int id_participacao){
+        //Requisitar a uma participacao de um evento
+        return null;
+    }
+    
+    public List<Arquivo> documentosParaAvaliar(){
+        //Requisitar as participacoes de um evento
+        return null;
+    }
 }

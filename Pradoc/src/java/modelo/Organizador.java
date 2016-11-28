@@ -5,15 +5,15 @@
  */
 package modelo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Anderson
  */
-class Organizador {
+public class Organizador {
     private Usuario usuario;
-    private ArrayList<Evento> evento;
+    private List<Evento> eventos;
 
     public Usuario getUsuario() {
         return usuario;
@@ -23,12 +23,32 @@ class Organizador {
         this.usuario = usuario;
     }
 
-    public ArrayList<Evento> getEvento() {
-        return evento;
+    public List<Evento> getEventos() {
+        return eventos;
     }
 
-    public void setEvento(ArrayList<Evento> evento) {
-        this.evento = evento;
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
+    }
+
+    
+    public boolean excluirEvento(int id_evento){
+        return true;
     }
     
+    public boolean validarDocumento(int id_documento){
+        return true;
+    }
+    
+    public Evento eventoEspecifico(int id_evento){
+        for(int i = 0; i< eventos.size(); i++){
+            Evento temp = eventos.get(i);
+            
+            if(id_evento == temp.getCodigo()){
+                return temp;
+            }
+        }
+        
+        return null;
+    }
 }

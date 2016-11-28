@@ -1,6 +1,6 @@
 <%-- 
     Document   : login
-    Created on : 10/11/2016, 11:09:00
+    Created on : 10/11/2016, 11:59:54
     Author     : Anderson
 --%>
 
@@ -9,21 +9,32 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Pradoc - Login</title>
+        
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <title>JSP Page</title>
     </head>
     <body>
         <div class="container">
-            <form method="POST">
-                <div class="form_input">
-                    <label>Username do Usuário</label><br>
-                    <input type="text" name="username" placeholder="username">
+        <img src="img/PradocLogo.png" width="10%" height="15%"/>
+        <form class="form-horizontal" method="POST">
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">E-mail</label>
+                <div class="controls">
+                    <input id="inputEmail" type="text" placeholder="Digite o seu e-mail..." />
                 </div>
-                <div class="form_input">
-                    <label>Senha do Usuário</label><br>
-                    <input type="password" name="senha" placeholder="senha">
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputPassword">Senha</label>
+                <div class="controls">
+                    <input id="inputPassword" type="password" placeholder="Digite a sua senha..." />
                 </div>
-                <input type="submit" name="submit" value="LOGIN">
-            </form>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button class="btn" type="submit">Acessar</button>
+                </div>
+            </div>
+        </form>
         </div>
     </body>
 </html>
