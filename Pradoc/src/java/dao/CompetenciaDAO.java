@@ -29,7 +29,7 @@ public class CompetenciaDAO {
         try {
             stmt = con.prepareStatement("INSERT INTO competecnia (id_evento, descricao, valor_max, peso, titulo) VALUES (?, ?, ?, ?, ?)");
             
-            stmt.setInt(1, evento.getCodigo());
+            stmt.setInt(1, evento.getId());
             stmt.setString(2, competencia.getDescricao());
             stmt.setDouble(3, competencia.getValorMax());
             stmt.setInt(4, competencia.getPeso());
@@ -145,7 +145,7 @@ public class CompetenciaDAO {
         try {
             stmt = con.prepareStatement("UPDATE competencia SET id_evento = ?, descricao = ?, valor_max = ?, peso = ?, titulo = ? WHERE id = ?");
             
-            stmt.setInt(1, evento.getCodigo());
+            stmt.setInt(1, evento.getId());
             stmt.setString(2, competencia.getDescricao());
             stmt.setDouble(3, competencia.getValorMax());
             stmt.setInt(4, competencia.getPeso());

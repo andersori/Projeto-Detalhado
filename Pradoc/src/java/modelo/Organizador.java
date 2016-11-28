@@ -44,7 +44,7 @@ public class Organizador {
         for(int i = 0; i< eventos.size(); i++){
             Evento temp = eventos.get(i);
             
-            if(id_evento == temp.getCodigo()){
+            if(id_evento == temp.getId()){
                 return temp;
             }
         }

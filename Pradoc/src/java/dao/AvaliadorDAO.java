@@ -48,7 +48,7 @@ public class AvaliadorDAO {
         List<Avaliador> avaliadores = null;
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM avaliadores");
+            stmt = con.prepareStatement("SELECT DISTINCT * FROM avaliadores");
             rs = stmt.executeQuery();
             avaliadores = new ArrayList<>();
             
@@ -58,6 +58,11 @@ public class AvaliadorDAO {
                 UsuarioDAO userDao = new UsuarioDAO();
                 Usuario user = userDao.selectId(rs.getInt("id_usuario"));
                 av.setUsuario(user);
+                
+                //Preencher as participações com o codigo do fernando
+                //while(){
+                //
+                //}
                 
                 avaliadores.add(av);
             }
@@ -69,5 +74,42 @@ public class AvaliadorDAO {
         
         return avaliadores;
         
+    }
+    
+    public void update(Avaliador av, Evento ev){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            
+            stmt = con.prepareStatement("UPDATE avaliador SET id_evento = ? WHERE id_usuario = ? ");
+            stmt.setInt(1, ev.getId());
+            stmt.setInt(2, av.getUsuario().getId());
+            
+            stmt.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AvaliadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+    
+    public void delete(Avaliador av){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            
+            stmt = con.prepareStatement("DELETE FROM avaliador WHERE id_usuario = ?");
+            stmt.setInt(1, av.getUsuario().getId());
+            
+            stmt.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AvaliadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
     }
 }

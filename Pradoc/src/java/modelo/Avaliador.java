@@ -30,11 +30,6 @@ public class Avaliador {
     public void setParticipacoes(List<Participacao> participacoes) {
         this.participacoes = participacoes;
     }
-
-    
-    /**
-     * Funções de uma AVALIADOR
-     */
     
     public boolean avaliar(int id_participacao){
         //Não entendi o que ele deve fazer
