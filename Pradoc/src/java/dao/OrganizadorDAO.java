@@ -24,21 +24,8 @@ import modelo.Usuario;
  * @author Douglas
  */
 public class OrganizadorDAO {
-    /*public void insert(Organizador org){
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        try {
-            stmt=con.prepareStatement("INSERT INTO organizador(usuario,eventos) VALUES (?,?)");
-            stmt.setObject(1, org.getUsuario());
-            stmt.setArray(2, (Array) org.getEventos());
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(OrganizadorDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-             ConnectionFactory.closeConnection(con, stmt);
-        }       
-    }*/
-    public List<Organizador> selectAll(){
+    
+    /*public List<Organizador> selectAll(){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs=null;
@@ -58,12 +45,6 @@ public class OrganizadorDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return organizadores;
-    }
-    public Organizador select(int id){
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        Organizador org = null;
-        stmt=con.prepareStatement("SELECT *FROM organizador WHERE id=?")
-    }
+    }*/
+   
 }
