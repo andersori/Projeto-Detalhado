@@ -18,19 +18,19 @@ public class TesteDeConexao {
     public static void main(String[] args){
         ConnectionFactory.getConnection();
         
-        /*  Teste de Inserção - TA FUNCIONANDO
+        // Teste de Inserção - TA FUNCIONANDO
         Usuario user = new Usuario();
-        user.setCpf("77437022354");
-        user.setEmail("user@email.com");
-        user.setInstituicaoDeEnsino("Unopar");
-        user.setNome("Anderson Soriano de Araújo");
-        user.setSenha("1234");
-        user.setTelefone("123456789");
-        user.setUsername("andersori");
+        user.setCpf("0554327543");
+        user.setEmail("mouse@email.com");
+        user.setInstituicaoDeEnsino("Unifor");
+        user.setNome("Carlos Eduardo Araújo Duarte");
+        user.setSenha("9876");
+        user.setTelefone("86453231");
+        user.setUsername("eduardo");
         
         UsuarioDAO userDao = new UsuarioDAO();
         userDao.insert(user);
-        */
+        
         
         /*  Teste de Update - TA FUNCIONANDO
         UsuarioDAO userDao = new UsuarioDAO();

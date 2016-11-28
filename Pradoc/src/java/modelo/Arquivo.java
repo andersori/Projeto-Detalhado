@@ -9,8 +9,44 @@ package modelo;
  *
  * @author Anderson
  */
-public abstract class Arquivo {
+public class Arquivo {
     private int id;
-    private int codigoEvento;
-    private String username;
+    private int id_usuario;
+    private String caminho;
+    private String url;
+
+    
+    
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public String getCaminho() {
+        return caminho;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setCaminho(String caminho) {
+        this.caminho = caminho;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }  
+    
 }
