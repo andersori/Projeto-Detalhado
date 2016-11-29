@@ -15,7 +15,9 @@ import java.util.List;
 public class Evento {
     private int id;
     private String nome;
-    private List<String> areaConhecimento;
+    private List<String> areaConhecimento;// No banco não tem essa Lista 29/11
+    private float notaAprovacao;
+    private String descricao;
     private Calendar inicioSubmicao;
     private Calendar fimSubmicao;
     private Calendar inicioAvaliacao;
@@ -27,8 +29,24 @@ public class Evento {
     private List<Avaliador> avaliadores;
     private List<Participacao> participacoes;
     private Arquivo modeloDocumento;
-    private int maxParticipantes;
+    private int maxParticipantes;       // Tbm não tem essa parte no banco 29/11
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+        
+    public float getNotaAprovacao() {
+        return notaAprovacao;
+    }
+
+    public void setNotaAprovacao(float notaAprovacao) {
+        this.notaAprovacao = notaAprovacao;
+    }
+    
     public int getId() {
         return id;
     }
