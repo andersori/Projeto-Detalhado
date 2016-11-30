@@ -18,7 +18,22 @@ public class TesteDeConexao {
     public static void main(String[] args){
         ConnectionFactory.getConnection();
         
-        // Teste de Inserção - TA FUNCIONANDO
+        Usuario user = new Usuario();
+        
+        user.setUsername("eduardo");
+        user.setSenha("9876");
+        
+        UsuarioDAO uDao = new UsuarioDAO();
+        
+        if (uDao.selectUserAndSenha(user)){
+            System.out.println("Encontrou");
+        }
+        else{
+            System.out.println("Não encontrou");
+        }
+        
+        
+        /*// Teste de Inserção - TA FUNCIONANDO
         Usuario user = new Usuario();
         user.setCpf("0554327543");
         user.setEmail("mouse@email.com");
@@ -30,7 +45,7 @@ public class TesteDeConexao {
         
         UsuarioDAO userDao = new UsuarioDAO();
         userDao.insert(user);
-        
+        */
         
         /*  Teste de Update - TA FUNCIONANDO
         UsuarioDAO userDao = new UsuarioDAO();

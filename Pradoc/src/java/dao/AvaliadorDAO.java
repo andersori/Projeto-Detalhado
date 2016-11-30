@@ -53,10 +53,14 @@ public class AvaliadorDAO {
             avaliadores = new ArrayList<>();
             
             while(rs.next()){
-                Avaliador av = new Avaliador();
                 
                 UsuarioDAO userDao = new UsuarioDAO();
-                Usuario user = userDao.selectId(rs.getInt("id_usuario"));
+                Usuario user = new Usuario();
+                user.setId(rs.getInt("id_usuario"));
+                user = userDao.selectId(user);
+                
+                
+                Avaliador av = new Avaliador();
                 av.setUsuario(user);
                 
                 //Preencher as participações com o codigo do fernando

@@ -80,28 +80,28 @@ public class UsuarioDAO {
         return usuarios;
     }
     
-    public Usuario selectUsername(String username){
+    public Usuario selectUsername(Usuario user){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Usuario user = null;
+        Usuario userEncontrado = null;
         
         try {
             stmt = con.prepareStatement("SELECT * FROM usuario WHERE username = ?");
-            stmt.setString(1, username);
+            stmt.setString(1, user.getUsername());
             
             rs = stmt.executeQuery();
             if(rs.next()){
-                user = new Usuario();
+                userEncontrado = new Usuario();
                 
-                user.setCpf(rs.getString("cpf"));
-                user.setEmail(rs.getString("email"));
-                user.setInstituicaoDeEnsino(rs.getString("instituicao_de_ensino"));
-                user.setNome(rs.getString("nome"));
-                user.setSenha(rs.getString("senha"));
-                user.setTelefone(rs.getString("telefone"));
-                user.setUsername(rs.getString("username"));
-                user.setId(rs.getInt("id_usuario"));
+                userEncontrado.setCpf(rs.getString("cpf"));
+                userEncontrado.setEmail(rs.getString("email"));
+                userEncontrado.setInstituicaoDeEnsino(rs.getString("instituicao_de_ensino"));
+                userEncontrado.setNome(rs.getString("nome"));
+                userEncontrado.setSenha(rs.getString("senha"));
+                userEncontrado.setTelefone(rs.getString("telefone"));
+                userEncontrado.setUsername(rs.getString("username"));
+                userEncontrado.setId(rs.getInt("id_usuario"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -109,31 +109,31 @@ public class UsuarioDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         
-        return user;
+        return userEncontrado;
         
     }
-    public Usuario selectId(int id){
+    public Usuario selectId(Usuario user){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Usuario user = null;
+        Usuario userEncontrado = null;
         
         try {
             stmt = con.prepareStatement("SELECT * FROM usuario WHERE id_usuario = ?");
-            stmt.setInt(1, id);
+            stmt.setInt(1, user.getId());
             
             rs = stmt.executeQuery();
             if(rs.next()){
-                user = new Usuario();
+                userEncontrado = new Usuario();
                 
-                user.setCpf(rs.getString("cpf"));
-                user.setEmail(rs.getString("email"));
-                user.setInstituicaoDeEnsino(rs.getString("instituicao_de_ensino"));
-                user.setNome(rs.getString("nome"));
-                user.setSenha(rs.getString("senha"));
-                user.setTelefone(rs.getString("telefone"));
-                user.setUsername(rs.getString("username"));
-                user.setId(rs.getInt("id_usuario"));
+                userEncontrado.setCpf(rs.getString("cpf"));
+                userEncontrado.setEmail(rs.getString("email"));
+                userEncontrado.setInstituicaoDeEnsino(rs.getString("instituicao_de_ensino"));
+                userEncontrado.setNome(rs.getString("nome"));
+                userEncontrado.setSenha(rs.getString("senha"));
+                userEncontrado.setTelefone(rs.getString("telefone"));
+                userEncontrado.setUsername(rs.getString("username"));
+                userEncontrado.setId(rs.getInt("id_usuario"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -141,8 +141,40 @@ public class UsuarioDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         
-        return user;
+        return userEncontrado;
         
+    }
+    public boolean selectUserAndSenha(Usuario user){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Usuario userEncontrado = null;
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE username = ? AND senha = ?");
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getSenha());
+            
+            rs = stmt.executeQuery();
+            if(rs.next()){
+                userEncontrado = new Usuario();
+                
+                userEncontrado.setCpf(rs.getString("cpf"));
+                userEncontrado.setEmail(rs.getString("email"));
+                userEncontrado.setInstituicaoDeEnsino(rs.getString("instituicao_de_ensino"));
+                userEncontrado.setNome(rs.getString("nome"));
+                userEncontrado.setSenha(rs.getString("senha"));
+                userEncontrado.setTelefone(rs.getString("telefone"));
+                userEncontrado.setUsername(rs.getString("username"));
+                userEncontrado.setId(rs.getInt("id_usuario"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return userEncontrado != null;
     }
     
     public void update(Usuario user){
