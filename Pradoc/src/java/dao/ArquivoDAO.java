@@ -119,6 +119,37 @@ public class ArquivoDAO {
         
     }
     
+    public List<Arquivo> selectAproEvento( Evento even){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Arquivo> arquivos = new ArrayList<>();
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM arquivo AS a, evento AS e , participacao AS p, avaliacao AS av WHERE p.id = e.id_participacao AND p.id_arquivo = a.id AND av.id_participacao = p.id AND e.id = ? AND e.nota_de_aprovacao <= av.valor_obtido");
+            stmt.setInt(1, even.getId());
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Arquivo arq = new Arquivo();
+                arq.setId(rs.getInt("id"));
+                arq.setCaminho(rs.getString("caminho"));
+                arq.setUrl(rs.getString("url"));
+                arq.setId_usuario(rs.getInt("id_usuario"));
+                
+                arquivos.add(arq);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ArquivoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return arquivos;
+        
+    }
+    
     public List<Arquivo> selectArqEvento( Evento even){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -126,7 +157,7 @@ public class ArquivoDAO {
         List<Arquivo> arquivos = new ArrayList<>();
         
         try{
-            stmt = con.prepareStatement("SELECT * FROM arquivo AS a, evento AS e , participacao AS p WHERE p.id = e.id_participacao AND p.id_arquivo = a.id AND e.id = ?");
+            stmt = con.prepareStatement("SELECT * FROM arquivo AS a, evento AS e, participacao AS p WHERE e.id_participacao = p.id AND p.id_arquivo = a.id AND e.id = ?");
             stmt.setInt(1, even.getId());
             rs = stmt.executeQuery();
             
