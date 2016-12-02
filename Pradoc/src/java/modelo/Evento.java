@@ -5,7 +5,8 @@
  */
 package modelo;
 
-import java.util.Calendar;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 /**
@@ -18,19 +19,33 @@ public class Evento {
     private List<String> areaConhecimento;// No banco não tem essa Lista 29/11
     private float notaAprovacao;
     private String descricao;
-    private Calendar inicioSubmicao;
-    private Calendar fimSubmicao;
-    private Calendar inicioAvaliacao;
-    private Calendar fimAvaliacao;
-    private Calendar inicioRecurso;
-    private Calendar fimRecurso;
+    private Date inicioSubmissao;
+    private Date fimSubmissao;
+    private Date inicioAvaliacao;
+    private Date fimAvaliacao;
+    private Date inicioRecurso;
+    private Date fimRecurso;
+    private Date resultadoRecurso;
+    private Time horaInicioSubmissao;
+    private Time horaFimSubmissao;
+    private Time horaInicioAvaliacao;
+    private Time horaFimAvaliacao;
+    private Time horaInicioRecurso;
+    private Time horaFimRecurso;
     private String instituicao;
     private Organizador organizador;
     private List<Avaliador> avaliadores;
     private List<Participacao> participacoes;
     private Arquivo modeloDocumento;
-    private int maxParticipantes;       // Tbm não tem essa parte no banco 29/11
 
+    public Date getResultadoRecurso() {
+        return resultadoRecurso;
+    }
+
+    public void setResultadoRecurso(Date resultadoRecurso) {
+        this.resultadoRecurso = resultadoRecurso;
+    }
+    
     public String getDescricao() {
         return descricao;
     }
@@ -55,13 +70,79 @@ public class Evento {
         this.id = id;
     }
 
-    public int getMaxParticipantes() {
-        return maxParticipantes;
+    public Date getInicioAvaliacao() {
+        return inicioAvaliacao;
     }
 
-    public void setMaxParticipantes(int maxParticipantes) {
-        this.maxParticipantes = maxParticipantes;
+    public void setInicioAvaliacao(Date inicioAvaliacao) {
+        this.inicioAvaliacao = inicioAvaliacao;
     }
+
+    public Date getFimAvaliacao() {
+        return fimAvaliacao;
+    }
+
+    public void setFimAvaliacao(Date fimAvaliacao) {
+        this.fimAvaliacao = fimAvaliacao;
+    }
+
+    public Date getInicioRecurso() {
+        return inicioRecurso;
+    }
+
+    public void setInicioRecurso(Date inicioRecurso) {
+        this.inicioRecurso = inicioRecurso;
+    }
+
+    public Date getFimRecurso() {
+        return fimRecurso;
+    }
+
+    public void setFimRecurso(Date fimRecurso) {
+        this.fimRecurso = fimRecurso;
+    }
+
+    public Time getHoraFimSubmissao() {
+        return horaFimSubmissao;
+    }
+
+    public void setHoraFimSubmissao(Time horaFimSubmissao) {
+        this.horaFimSubmissao = horaFimSubmissao;
+    }
+
+    public Time getHoraInicioAvaliacao() {
+        return horaInicioAvaliacao;
+    }
+
+    public void setHoraInicioAvaliacao(Time horaInicioAvaliacao) {
+        this.horaInicioAvaliacao = horaInicioAvaliacao;
+    }
+
+    public Time getHoraFimAvaliacao() {
+        return horaFimAvaliacao;
+    }
+
+    public void setHoraFimAvaliacao(Time horaFimAvaliacao) {
+        this.horaFimAvaliacao = horaFimAvaliacao;
+    }
+
+    public Time getHoraInicioRecurso() {
+        return horaInicioRecurso;
+    }
+
+    public void setHoraInicioRecurso(Time horaInicioRecurso) {
+        this.horaInicioRecurso = horaInicioRecurso;
+    }
+
+    public Time getHoraFimRecurso() {
+        return horaFimRecurso;
+    }
+
+    public void setHoraFimRecurso(Time horaFimRecurso) {
+        this.horaFimRecurso = horaFimRecurso;
+    }
+
+    
 
     public String getNome() {   //V
         return nome;
@@ -81,102 +162,34 @@ public class Evento {
         this.areaConhecimento= areaConhecimento;
     }
 
-    public Calendar getInicioSubmicao() {   //V  
-        return inicioSubmicao;
+    public Date getInicioSubmissao() {
+        return inicioSubmissao;
+    }
+    
+
+    public void setHoraInicioSubmissao(Time horaInicioSubmissao) {
+        this.horaInicioSubmissao = horaInicioSubmissao;
     }
 
-    public void setInicioSubmicao(int hora, int minuto, int segundo, int dia, int mes, int ano) {
-        
-        //Verificar os erro nessas passagem de parametros
-        
-        this.inicioSubmicao.set(Calendar.HOUR_OF_DAY, hora);
-        this.inicioSubmicao.set(Calendar.MINUTE, minuto);
-        this.inicioSubmicao.set(Calendar.SECOND, segundo);
-        this.inicioSubmicao.set(Calendar.DAY_OF_MONTH, dia);
-        this.inicioSubmicao.set(Calendar.MONTH, mes);
-        this.inicioSubmicao.set(Calendar.YEAR, ano);
+    public Date getFimSubmissao() {
+        return fimSubmissao;
     }
 
-    public Calendar getFimSubmicao() {    //V
-        return fimAvaliacao;
+    public void setFimSubmissao(Date fimSubmissao) {
+        this.fimSubmissao = fimSubmissao;
     }
 
-    public void setFimSubmicao(int hora, int minuto, int segundo, int dia, int mes, int ano) {
-        
-        //Verificar os erro nessas passagem de parametros
-        
-        this.fimSubmicao.set(Calendar.HOUR_OF_DAY, hora);
-        this.fimSubmicao.set(Calendar.MINUTE, minuto);
-        this.fimSubmicao.set(Calendar.SECOND, segundo);
-        this.fimSubmicao.set(Calendar.DAY_OF_MONTH, dia);
-        this.fimSubmicao.set(Calendar.MONTH, mes);
-        this.fimSubmicao.set(Calendar.YEAR, ano);
-        
+    public void setInicioSubmissao(Date inicioSubmissao) {
+        this.inicioSubmissao = inicioSubmissao;
     }
 
-    public Calendar getInicioAvaliacao() {  //OK
-        return inicioAvaliacao;
+    public Time getHoraInicioSubmissao() {
+        return horaInicioSubmissao;
     }
 
-    public void setInicioAvaliacao(int hora, int minuto, int segundo, int dia, int mes, int ano) {
-        
-        //Verificar os erro nessas passagem de parametros
-        
-        this.inicioAvaliacao.set(Calendar.HOUR_OF_DAY, hora);
-        this.inicioAvaliacao.set(Calendar.MINUTE, minuto);
-        this.inicioAvaliacao.set(Calendar.SECOND, segundo);
-        this.inicioAvaliacao.set(Calendar.DAY_OF_MONTH, dia);
-        this.inicioAvaliacao.set(Calendar.MONTH, mes);
-        this.inicioAvaliacao.set(Calendar.YEAR, ano);
-    }
 
-    public Calendar getFimAvaliacao() {
-        return fimAvaliacao;
-    }
 
-    public void setFimAvaliacao(int hora, int minuto, int segundo, int dia, int mes, int ano) {
-        
-        //Verificar os erro nessas passagem de parametros
-        
-        this.fimAvaliacao.set(Calendar.HOUR_OF_DAY, hora);
-        this.fimAvaliacao.set(Calendar.MINUTE, minuto);
-        this.fimAvaliacao.set(Calendar.SECOND, segundo);
-        this.fimAvaliacao.set(Calendar.DAY_OF_MONTH, dia);
-        this.fimAvaliacao.set(Calendar.MONTH, mes);
-        this.fimAvaliacao.set(Calendar.YEAR, ano);
-    }
-
-    public Calendar getInicioRecurso() {
-        return inicioRecurso;
-    }
-
-    public void setInicioRecurso(int hora, int minuto, int segundo, int dia, int mes, int ano) {
-        
-        //Verificar os erro nessas passagem de parametros
-        
-        this.inicioRecurso.set(Calendar.HOUR_OF_DAY, hora);
-        this.inicioRecurso.set(Calendar.MINUTE, minuto);
-        this.inicioRecurso.set(Calendar.SECOND, segundo);
-        this.inicioRecurso.set(Calendar.DAY_OF_MONTH, dia);
-        this.inicioRecurso.set(Calendar.MONTH, mes);
-        this.inicioRecurso.set(Calendar.YEAR, ano);
-    }
-
-    public Calendar getFimRecurso() {
-        return fimRecurso;
-    }
-
-    public void setFimRecurso(int hora, int minuto, int segundo, int dia, int mes, int ano) {
-        
-        //Verificar os erro nessas passagem de parametros
-        
-        this.fimRecurso.set(Calendar.HOUR_OF_DAY, hora);
-        this.fimRecurso.set(Calendar.MINUTE, minuto);
-        this.fimRecurso.set(Calendar.SECOND, segundo);
-        this.fimRecurso.set(Calendar.DAY_OF_MONTH, dia);
-        this.fimRecurso.set(Calendar.MONTH, mes);
-        this.fimRecurso.set(Calendar.YEAR, ano);
-    }
+   
 
     public String getInstituicao() {
         return instituicao;
