@@ -51,4 +51,9 @@ public class Organizador {
         
         return null;
     }
+    
+    public int organizadorPeloId(Organizador o){
+        Usuario u = getUsuario();
+        return u.getId();
+    }
 }
