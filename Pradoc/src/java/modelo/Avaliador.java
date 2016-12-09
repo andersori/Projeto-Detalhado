@@ -11,16 +11,11 @@ import java.util.List;
  *
  * @author Anderson
  */
-public class Avaliador {
-    private Usuario usuario;
+public class Avaliador extends Decorator{
     private List<Participacao> participacoes;
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public Avaliador(Usuario usuario) {
+        super(usuario);
     }
 
     public List<Participacao> getParticipacoes() {
@@ -31,26 +26,13 @@ public class Avaliador {
         this.participacoes = participacoes;
     }
     
-    public boolean avaliar(int id_participacao){
-        //Não entendi o que ele deve fazer
-        
+    //-----------------------------------------------------------------------------
+    public boolean definirConceito(Arquivo arquivo){        
         return true;
-    }
-    
-    public boolean definirConceito(int id_participacao){
-        //Para determinar o conceito é so acessar um evento especifico
-        //depois uma participação especifica.
-        
-        return true;
-    }
-    
-    public Arquivo baixarDocumento(int id_participacao){
-        //Requisitar a uma participacao de um evento
-        return null;
     }
     
     public List<Arquivo> documentosParaAvaliar(){
-        //Requisitar as participacoes de um evento
         return null;
     }
+
 }

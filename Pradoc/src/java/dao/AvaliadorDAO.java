@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import modelo.Avaliador;
 import modelo.Evento;
 import modelo.Usuario;
+import modelo.UsuarioConcreto;
 
 /**
  *
@@ -55,13 +56,12 @@ public class AvaliadorDAO {
             while(rs.next()){
                 
                 UsuarioDAO userDao = new UsuarioDAO();
-                Usuario user = new Usuario();
+                UsuarioConcreto user = new UsuarioConcreto();
                 user.setId(rs.getInt("id_usuario"));
-                user = userDao.selectId(user);
+                user = (UsuarioConcreto) userDao.selectId(user);
                 
                 
-                Avaliador av = new Avaliador();
-                av.setUsuario(user);
+                Avaliador av = new Avaliador(user);
                 
                 //Preencher as participações com o codigo do fernando
                 //while(){

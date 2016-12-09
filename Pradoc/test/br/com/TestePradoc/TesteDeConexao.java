@@ -7,7 +7,9 @@ package br.com.TestePradoc;
 import connection.ConnectionFactory;
 import dao.UsuarioDAO;
 import java.sql.Connection;
+import modelo.Avaliador;
 import modelo.Usuario;
+import modelo.UsuarioConcreto;
 
 /**
  *
@@ -18,6 +20,14 @@ public class TesteDeConexao {
     public static void main(String[] args){
         ConnectionFactory.getConnection();
         
+        
+        Usuario usuario = new UsuarioConcreto();
+        usuario = new Avaliador(usuario);
+        
+        
+        
+        
+        /*
         Usuario user = new Usuario();
         
         user.setUsername("eduardo");
@@ -31,6 +41,7 @@ public class TesteDeConexao {
         else{
             System.out.println("Não encontrou");
         }
+        */
         
         
         /*// Teste de Inserção - TA FUNCIONANDO

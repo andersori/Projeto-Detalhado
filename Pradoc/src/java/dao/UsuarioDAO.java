@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.UsuarioConcreto;
 
 /**
  *
@@ -46,18 +47,18 @@ public class UsuarioDAO {
         }
     }
     
-    public List<Usuario> selectAll(){
+    public List<UsuarioConcreto> selectAll(){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Usuario> usuarios = new ArrayList<>();
+        List<UsuarioConcreto> usuarios = new ArrayList<>();
         
         try {
             stmt = con.prepareStatement("SELECT * FROM usuario");
             rs = stmt.executeQuery();
             
             while(rs.next()){
-                Usuario user = new Usuario();
+                UsuarioConcreto user = new UsuarioConcreto();
                 
                 user.setCpf(rs.getString("cpf"));
                 user.setEmail(rs.getString("email"));
@@ -80,11 +81,11 @@ public class UsuarioDAO {
         return usuarios;
     }
     
-    public Usuario selectUsername(Usuario user){
+    public UsuarioConcreto selectUsername(UsuarioConcreto user){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Usuario userEncontrado = null;
+        UsuarioConcreto userEncontrado = null;
         
         try {
             stmt = con.prepareStatement("SELECT * FROM usuario WHERE username = ?");
@@ -92,7 +93,7 @@ public class UsuarioDAO {
             
             rs = stmt.executeQuery();
             if(rs.next()){
-                userEncontrado = new Usuario();
+                userEncontrado = new UsuarioConcreto();
                 
                 userEncontrado.setCpf(rs.getString("cpf"));
                 userEncontrado.setEmail(rs.getString("email"));
@@ -112,11 +113,11 @@ public class UsuarioDAO {
         return userEncontrado;
         
     }
-    public Usuario selectId(Usuario user){
+    public UsuarioConcreto selectId(UsuarioConcreto user){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Usuario userEncontrado = null;
+        UsuarioConcreto userEncontrado = null;
         
         try {
             stmt = con.prepareStatement("SELECT * FROM usuario WHERE id_usuario = ?");
@@ -124,7 +125,7 @@ public class UsuarioDAO {
             
             rs = stmt.executeQuery();
             if(rs.next()){
-                userEncontrado = new Usuario();
+                userEncontrado = new UsuarioConcreto();
                 
                 userEncontrado.setCpf(rs.getString("cpf"));
                 userEncontrado.setEmail(rs.getString("email"));
@@ -144,7 +145,7 @@ public class UsuarioDAO {
         return userEncontrado;
         
     }
-    public boolean selectUserAndSenha(Usuario user){
+    public boolean selectUserAndSenha(UsuarioConcreto user){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -157,7 +158,7 @@ public class UsuarioDAO {
             
             rs = stmt.executeQuery();
             if(rs.next()){
-                userEncontrado = new Usuario();
+                userEncontrado = new UsuarioConcreto();
                 
                 userEncontrado.setCpf(rs.getString("cpf"));
                 userEncontrado.setEmail(rs.getString("email"));
@@ -177,7 +178,7 @@ public class UsuarioDAO {
         return userEncontrado != null;
     }
     
-    public void update(Usuario user){
+    public void update(UsuarioConcreto user){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
@@ -201,7 +202,7 @@ public class UsuarioDAO {
         }
     }
     
-    public void delete(Usuario user){
+    public void delete(UsuarioConcreto user){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         

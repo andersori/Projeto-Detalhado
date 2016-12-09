@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Anderson
  */
-public class Usuario {
+public abstract class Usuario {
     private int id;
     private String nome;
     private String telefone;
@@ -117,22 +117,9 @@ public class Usuario {
     public void setEspecializacao(List<String> especializacao) {
         this.especializacao = especializacao;
     }
-
-    /**
-     * Funções dO USUARIO
-     */
     
-    public List<Evento> eventosParticipando(){
-        //Requisita a alguma classe do DAO
-        return null;
-    }
+    //Função padrão de um usuário
+    public abstract void criarEvento(Evento evento);
     
-    public boolean fazerLogin(String senha){
-        return getSenha().equals(senha);
-    }
-    
-    public void criarEvento(Evento evento){
-        //Alguma classe da DAO salva isso no banco
-        //associando esse usuário com o evento criado
-    }
+    public abstract boolean efetuarLogin(String senha);
 }

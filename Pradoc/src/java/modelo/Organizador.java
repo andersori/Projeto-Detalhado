@@ -11,18 +11,13 @@ import java.util.List;
  *
  * @author Anderson
  */
-public class Organizador {
-    private Usuario usuario;
+public class Organizador extends Decorator{
     private List<Evento> eventos;
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Organizador(Usuario usuario) {
+        super(usuario);
     }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
+    
     public List<Evento> getEventos() {
         return eventos;
     }
@@ -31,20 +26,20 @@ public class Organizador {
         this.eventos = eventos;
     }
 
-    
-    public boolean excluirEvento(int id_evento){
+    //-----------------------------------------------------------------------------
+    public boolean excluirEvento(Evento evento){
         return true;
     }
     
-    public boolean validarDocumento(int id_documento){
+    public boolean validarParticipacao(Arquivo arquivo){
         return true;
     }
     
-    public Evento eventoEspecifico(int id_evento){
+    public Evento eventoEspecifico(Evento evento){
         for(int i = 0; i< eventos.size(); i++){
             Evento temp = eventos.get(i);
             
-            if(id_evento == temp.getId()){
+            if(evento.getId() == temp.getId()){
                 return temp;
             }
         }
@@ -52,8 +47,4 @@ public class Organizador {
         return null;
     }
     
-    public int organizadorPeloId(Organizador o){
-        Usuario u = getUsuario();
-        return u.getId();
-    }
 }
