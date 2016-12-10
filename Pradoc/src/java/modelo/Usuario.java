@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Anderson
  */
-public abstract class Usuario {
+public class Usuario {
     private int id;
     private String nome;
     private String telefone;
@@ -33,64 +33,72 @@ public abstract class Usuario {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public boolean setNome(String nome) {
         if(!ValidacaoString.isNome(nome)){
-            //O que deve ser feito?
+            return false;
+        }
+        else{
+            this.nome = nome;
+            return true;
         }
         
-        //Se não encontrou é so setar
-        this.nome = nome;
     }
 
     public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public boolean setTelefone(String telefone) {
         if(!ValidacaoString.isTelefone(telefone)){
-            //O que deve ser feito?
+            return false;
+        }
+        else{
+            this.telefone = telefone;
+            return true;
         }
         
-        //Validar a quantidade
-        
-        //Formatar o numero
-        
-        this.telefone = telefone;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public boolean setEmail(String email) {
         if(!ValidacaoString.isEmail(email)){
-            //O que deve ser feito
+            return false;
         }
-        
-        this.email = email;
+        else{
+            this.email = email;
+            return true;
+        }
     }
 
     public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public boolean setCpf(String cpf) {
         if(!ValidacaoString.isCPF(cpf)){
-            //O que deve ser feito?
+            return false;
         }
-        
-        this.cpf = cpf;
+        else{
+            this.cpf = cpf;
+            return true;
+        }
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public boolean setUsername(String username) {
         if(!ValidacaoString.isUsernme(username)){
-            //O que deve ser feito?
+            return false;
         }
-        this.username = username;
+        else{
+            this.username = username;
+            return true;
+        }
     }
 
     public String getSenha() {
@@ -98,7 +106,6 @@ public abstract class Usuario {
     }
 
     public void setSenha(String senha) {
-        //Verificação de quantidade minima de digitos
         this.senha = senha;
     }
 
@@ -119,7 +126,11 @@ public abstract class Usuario {
     }
     
     //Função padrão de um usuário
-    public abstract void criarEvento(Evento evento);
+    public void criarEvento(Evento evento){
+        //Não sei o que deve ser feito
+    }
     
-    public abstract boolean efetuarLogin(String senha);
+    public boolean efetuarLogin(String senha){
+        return getSenha().equals(senha);
+    }
 }

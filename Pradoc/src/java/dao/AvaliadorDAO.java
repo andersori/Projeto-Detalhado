@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 import modelo.Avaliador;
 import modelo.Evento;
 import modelo.Usuario;
-import modelo.UsuarioConcreto;
 
 /**
  *
@@ -56,9 +55,9 @@ public class AvaliadorDAO {
             while(rs.next()){
                 
                 UsuarioDAO userDao = new UsuarioDAO();
-                UsuarioConcreto user = new UsuarioConcreto();
+                Usuario user = new Usuario();
                 user.setId(rs.getInt("id_usuario"));
-                user = (UsuarioConcreto) userDao.selectId(user);
+                user = userDao.selectId(user);
                 
                 
                 Avaliador av = new Avaliador(user);

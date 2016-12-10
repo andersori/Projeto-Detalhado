@@ -11,11 +11,20 @@ import java.util.List;
  *
  * @author Anderson
  */
-public class Avaliador extends Decorator{
+public class Avaliador{
+    Usuario usuario;
     private List<Participacao> participacoes;
 
     public Avaliador(Usuario usuario) {
-        super(usuario);
+        this.usuario = usuario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public List<Participacao> getParticipacoes() {

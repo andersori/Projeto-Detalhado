@@ -9,7 +9,6 @@ import dao.UsuarioDAO;
 import java.sql.Connection;
 import modelo.Avaliador;
 import modelo.Usuario;
-import modelo.UsuarioConcreto;
 
 /**
  *
@@ -19,10 +18,6 @@ public class TesteDeConexao {
     
     public static void main(String[] args){
         ConnectionFactory.getConnection();
-        
-        
-        Usuario usuario = new UsuarioConcreto();
-        usuario = new Avaliador(usuario);
         
         
         

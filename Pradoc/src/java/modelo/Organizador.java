@@ -11,11 +11,12 @@ import java.util.List;
  *
  * @author Anderson
  */
-public class Organizador extends Decorator{
+public class Organizador{
+    private Usuario usuario;
     private List<Evento> eventos;
 
     public Organizador(Usuario usuario) {
-        super(usuario);
+        this.usuario = usuario;
     }
     
     public List<Evento> getEventos() {
