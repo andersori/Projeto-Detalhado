@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Evento;
@@ -40,7 +42,7 @@ public class EventoDAO {
             stmt.setDate(10, e.getResultadoRecurso());
             stmt.setString(11, e.getInstituicao());
             Organizador o = e.getOrganizador();
-            stmt.setInt(12, o.organizadorPeloId(o));
+            stmt.setInt(12, (o.getId()));
 
             // stmt do arquivo
             stmt.setTime(14, e.getHoraInicioSubmissao());
@@ -93,5 +95,43 @@ public class EventoDAO {
                 
             return e;
         }
-
+        
+        public List<Evento> SelectAll(){
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            List<Evento> eventos = new ArrayList<>();
+            
+        try {
+            stmt=con.prepareStatement("SELECT * FROM evento GROUP BY id_evento DESC");
+            rs=stmt.executeQuery();
+            if(rs == null){
+                eventos=null;
+            }else{
+                while (rs.next()){
+                    Evento e= new Evento();
+                    e.setId(rs.getInt("id_evento"));
+                    e.setNome(rs.getString("nome_evento"));
+                    e.setNotaAprovacao(rs.getFloat("nota_de_aprovacao"));
+                    e.setDescricao(rs.getString("descricao_evento"));
+                    e.setInicioSubmissao(rs.getDate("data_inicio_submissao"));
+                    e.setFimSubmissao(rs.getDate("data_fim_submicao"));
+                    e.setInicioAvaliacao(rs.getDate("data_inicio_avaliacao"));
+                    e.setFimAvaliacao(rs.getDate("data_fim_avaliacao"));
+                    e.setInicioRecurso(rs.getDate("data_inicio_recurso"));
+                    e.setFimRecurso(rs.getDate("data_fim_recurso"));
+                    e.setResultadoRecurso(rs.getDate("data_resultado_do_recurso"));
+                    e.setInstituicao(rs.getString("instituicão"));
+                    eventos.add(e);
+                }
+                
+            }           
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+                    
+            return eventos;
+        }
 }

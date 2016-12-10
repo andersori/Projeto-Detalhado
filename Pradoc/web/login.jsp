@@ -17,14 +17,15 @@
         <!-- Latest compiled and minified CSS -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <link rel="stylesheet" type="text/css" href="style.css"/>
-        <title>JSP Page</title>
+        <title>PraDoc-Login</title>
     </head>
     <body>
         <div class="container">
+            
             <div class="container-fluid text-center">
                 <div class="row"> <img alt="Logomarca do site PRADOC." src="img/PradocLogo.png" width="10%" height="15%"/>
              </div>  
-            <div class="container-fluid">    
+            <div class="container-fluid text-center">    
             <form action="login.do" method="POST">
                     <div class="form-group">
                         <label for="email">Nome de Usuário:</label>
