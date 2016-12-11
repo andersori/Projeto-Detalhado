@@ -179,22 +179,23 @@ public class Evento implements IEvento{
         return arq.getCaminho();
     }
 
-    @Override   /*FALTA*/
+    @Override   /*OK*/
     public boolean excluir() {
         EventoDAO dao = new EventoDAO();
         
-        //Utilizar o remove do vento
+       dao.delete(this);
         
         return true;
     }
 
-    @Override   /*FALTA*/
-    public boolean valiadarParticipacao(int idParticipacao) {
+    @Override   /*OK*/
+    public boolean valiadarParticipacao(int idParticipacao, boolean isValido) {
         ParticipacaoDAO dao = new ParticipacaoDAO();
-        Participacao p = new Participacao();
+        Participacao p = dao.selectId(idParticipacao);
+        
+        p.setValido(isValido);
         
         dao.update(p);
-        
         return true;
     }
 
@@ -213,7 +214,7 @@ public class Evento implements IEvento{
         return true;
     }
 
-    @Override
+    @Override   /*OK*/
     public boolean anexarModelo(Arquivo arq) {
         ArquivoDAO dao = new ArquivoDAO();
         dao.insert(arq, this.organizador);
@@ -227,12 +228,16 @@ public class Evento implements IEvento{
         AvaliadorDAO dao = new AvaliadorDAO();
         UsuarioList avaliadores = dao.selectAll();
         
-        
+        return true;
     }
 
-    @Override
-    public boolean requisiatarRevisao(Usuario user, Participacao part) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override   /*OK*/
+    public boolean requisiatarRevisao(Participacao part) {
+        ParticipacaoDAO dao = new ParticipacaoDAO();
+        part.setRevisar(true);
+        
+        dao.update(part);
+        return true;
     }
     
     

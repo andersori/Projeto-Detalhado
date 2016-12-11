@@ -23,7 +23,7 @@ import modelo.Participacao;
  */
 public class ParticipacaoDAO {
     
-    public void insert(Participacao participacao) throws SQLException{
+    public void insert(Participacao participacao){
         Connection con= ConnectionFactory.getConnection();
         PreparedStatement stmt=null;
         try{
@@ -42,7 +42,8 @@ public class ParticipacaoDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     } 
-    public List<Participacao> selectAll() throws SQLException{
+    
+    public List<Participacao> selectAll(){
         ResultSet rs=null;
         ResultSet rsEmails=null;
         ResultSet rsAv=null;
@@ -96,7 +97,8 @@ public class ParticipacaoDAO {
         return participacoes;
             
     }
-    public Participacao selectId(int id) throws SQLException{
+    
+    public Participacao selectId(int id){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         PreparedStatement stmt2 =null;
@@ -145,7 +147,7 @@ public class ParticipacaoDAO {
         return participacao;
     }
     
-    public void update(Participacao participacao) throws SQLException{
+    public void update(Participacao participacao){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         try{
@@ -166,7 +168,7 @@ public class ParticipacaoDAO {
         }
     }
     
-    public void delete(Participacao participacao) throws SQLException{
+    public void delete(Participacao participacao){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         PreparedStatement stmt2=null;

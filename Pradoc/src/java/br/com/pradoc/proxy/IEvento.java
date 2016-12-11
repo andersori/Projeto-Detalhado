@@ -15,13 +15,13 @@ import modelo.Usuario;
  * @author Anderson
  */
 public interface IEvento {
-    public void definirConceito(Competencia conceito, Participacao part, double valor, String observacao);  /*OK*/
-    public String baixarArquivo(int id_arquivo);                /*OK*/
-    public boolean excluir();                                   /*FALTA*/
-    public boolean valiadarParticipacao(int idParticipacao);    /*FALTA*/
-    public boolean adicionarAvaliador(Usuario user);            /*OK*/
-    public boolean removerAvaliador(Usuario user);              /*OK*/
-    public boolean anexarModelo(Arquivo arq);                   /*OK*/
+    public void definirConceito(Competencia conceito, Participacao part, double valor, String observacao);
+    public String baixarArquivo(int id_arquivo);
+    public boolean excluir();
+    public boolean valiadarParticipacao(int idParticipacao, boolean isValido);
+    public boolean adicionarAvaliador(Usuario user);
+    public boolean removerAvaliador(Usuario user);            
+    public boolean anexarModelo(Arquivo arq);              
     public boolean distribuirArquivos();                        /*FALTA*/
-    public boolean requisiatarRevisao(Usuario user, Participacao part);    
+    public boolean requisiatarRevisao(Participacao part);
 }

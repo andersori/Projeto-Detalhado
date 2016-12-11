@@ -9,7 +9,6 @@ import dao.ConnectionFactory;
 import dao.UsuarioDAO;
 import java.sql.Connection;
 import java.util.Iterator;
-import modelo.Avaliador;
 import modelo.Usuario;
 
 /**

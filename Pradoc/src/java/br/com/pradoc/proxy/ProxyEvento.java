@@ -60,10 +60,10 @@ public class ProxyEvento implements IEvento{
     }
 
     @Override
-    public boolean valiadarParticipacao(int idParticipacao) {
+    public boolean valiadarParticipacao(int idParticipacao, boolean isValido) {
         //Se tiver permição
         if(true){
-            return evento.valiadarParticipacao(idParticipacao);
+            return evento.valiadarParticipacao(idParticipacao, isValido);
         }
         else{
             return false;
@@ -115,10 +115,10 @@ public class ProxyEvento implements IEvento{
     }
 
     @Override
-    public boolean requisiatarRevisao(Usuario user, Participacao part) {
+    public boolean requisiatarRevisao(Participacao part) {
         //Se tiver permição
         if(true){
-            return evento.requisiatarRevisao(user, part);
+            return evento.requisiatarRevisao(part);
         }
         else{
             return false;
