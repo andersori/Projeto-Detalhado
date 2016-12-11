@@ -20,6 +20,14 @@ import modelo.Usuario;
  * @author Anderson
  */
 public class AvaliadorDAO {
+    /*
+    +------------+---------+------+-----+---------+-------+
+    | Field      | Type    | Null | Key | Default | Extra |
+    +------------+---------+------+-----+---------+-------+
+    | id_usuario | int(11) | NO   | MUL | NULL    |       |
+    | id_evento  | int(11) | NO   | MUL | NULL    |       |
+    +------------+---------+------+-----+---------+-------+
+    */
     public void insert(Usuario avaliador, Evento evento){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

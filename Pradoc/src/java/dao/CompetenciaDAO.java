@@ -40,14 +40,13 @@ public class CompetenciaDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO competecnia (id, id_evento, titulo, valor_max, peso, descricao) VALUES (?, ?, ?, ?, ?)");
+            stmt = con.prepareStatement("INSERT INTO competecnia (id_evento, titulo, valor_max, peso, descricao) VALUES (?, ?, ?, ?, ?)");
             
-            stmt.setInt(1, competencia.getId());
-            stmt.setInt(2, evento.getId());
-            stmt.setString(3, competencia.getTitulo());
-            stmt.setDouble(4, competencia.getValorMax());
-            stmt.setInt(5, competencia.getPeso());
-            stmt.setString(6, competencia.getDescricao());
+            stmt.setInt(1, evento.getId());
+            stmt.setString(2, competencia.getTitulo());
+            stmt.setDouble(3, competencia.getValorMax());
+            stmt.setInt(4, competencia.getPeso());
+            stmt.setString(5, competencia.getDescricao());
             
             stmt.executeUpdate();
             
@@ -170,7 +169,7 @@ public class CompetenciaDAO {
             stmt.setDouble(3, competencia.getValorMax());
             stmt.setInt(4, competencia.getPeso());
             stmt.setString(5, competencia.getTitulo());
-            stmt.setInt(6, competencia.getId());
+            stmt.setInt(1, competencia.getId());
             
             stmt.executeUpdate();
             
@@ -186,7 +185,7 @@ public class CompetenciaDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("DELETE FROM competencia WHERE id_comperencia = ?");
+            stmt = con.prepareStatement("DELETE FROM competencia WHERE id = ?");
             stmt.setInt(1, competencia.getId());
             
             stmt.executeUpdate();
