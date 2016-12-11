@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import br.com.pradoc.iterators.AvaliadorList;
+import br.com.pradoc.iterators.ParticipacaoList;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
@@ -34,8 +36,8 @@ public class Evento {
     private Time horaFimRecurso;
     private String instituicao;
     private Organizador organizador;
-    private List<Avaliador> avaliadores;
-    private List<Participacao> participacoes;
+    private AvaliadorList avaliadores;
+    private ParticipacaoList participacoes;
     private Arquivo modeloDocumento;
 
     public Date getResultadoRecurso() {
@@ -207,22 +209,22 @@ public class Evento {
         this.organizador = organizador;
     }
 
-    public List<Avaliador> getAvaliadores() {
+    public AvaliadorList getAvaliadores() {
         return avaliadores;
     }
 
-    public void setAvaliadores(List<Avaliador> avaliadores) {
+    public void setAvaliadores(AvaliadorList avaliadores) {
         this.avaliadores = avaliadores;
     }
 
-    public List<Participacao> getParticipacoes() {
+    public ParticipacaoList getParticipacoes() {
         return participacoes;
     }
 
-    public void setParticipacoes(List<Participacao> participacoes) {
+    public void setParticipacoes(ParticipacaoList participacoes) {
         this.participacoes = participacoes;
     }
-
+    
     public Arquivo getModeloDocumento() {
         return modeloDocumento;
     }

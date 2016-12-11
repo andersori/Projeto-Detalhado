@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import br.com.pradoc.iterators.ArquivoList;
+import br.com.pradoc.iterators.AvaliacaoList;
 import java.util.List;
 
 
@@ -15,11 +17,11 @@ import java.util.List;
 public class Participacao {
     private int id;
     private List<String> emailsUsuarios;
-    private List<Arquivo> arquivos;
+    private ArquivoList arquivos;
     private boolean valido;
     private String status;
     private float resultadoFinal;
-    private List<Avaliacao> avaliacoes;
+    private AvaliacaoList avaliacoes;
 
     public int getId() {
         return id;
@@ -35,14 +37,6 @@ public class Participacao {
 
     public void setEmailsUsuarios(List<String> emailsUsuarios) {
         this.emailsUsuarios = emailsUsuarios;
-    }
-
-    public List<Arquivo> getArquivos() {
-        return arquivos;
-    }
-
-    public void setArquivos(List<Arquivo> arquivos) {
-        this.arquivos = arquivos;
     }
 
     public boolean isValido() {
@@ -69,15 +63,21 @@ public class Participacao {
         this.resultadoFinal = resultadoFinal;
     }
 
-    public List<Avaliacao> getAvaliacoes() {
+    public ArquivoList getArquivos() {
+        return arquivos;
+    }
+
+    public void setArquivos(ArquivoList arquivos) {
+        this.arquivos = arquivos;
+    }
+
+    public AvaliacaoList getAvaliacoes() {
         return avaliacoes;
     }
 
-    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+    public void setAvaliacoes(AvaliacaoList avaliacoes) {
         this.avaliacoes = avaliacoes;
     }
-
-    
     
     
     /**

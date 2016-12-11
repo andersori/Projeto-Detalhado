@@ -7,28 +7,28 @@ package br.com.pradoc.iterators;
 
 import java.util.Iterator;
 import java.util.List;
-import modelo.Usuario;
+import modelo.Competencia;
 
 /**
  *
  * @author Anderson
  */
-public class UsuarioListIterator implements Iterator{
-    private List<Usuario> lista;
+public class CompetenciaListIterator implements Iterator{
+    private List<Competencia> lista;
     private int posicao;
-    
-    public UsuarioListIterator(List<Usuario> lista) {
+
+    public CompetenciaListIterator(List<Competencia> lista) {
         this.lista = lista;
         this.posicao = 0;
     }
-    
+
     @Override
     public boolean hasNext() {
         return posicao < lista.size();
     }
 
     @Override
-    public Usuario next() {
+    public Object next() {
         return lista.get(posicao++);
     }
     

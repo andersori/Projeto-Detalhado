@@ -5,7 +5,8 @@
  */
 package modelo;
 
-import java.util.List;
+import br.com.pradoc.iterators.ArquivoList;
+import br.com.pradoc.iterators.ParticipacaoList;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public class Avaliador{
     Usuario usuario;
-    private List<Participacao> participacoes;
+    private ParticipacaoList participacoes;
 
     public Avaliador(Usuario usuario) {
         this.usuario = usuario;
@@ -27,11 +28,11 @@ public class Avaliador{
         this.usuario = usuario;
     }
 
-    public List<Participacao> getParticipacoes() {
+    public ParticipacaoList getParticipacoes() {
         return participacoes;
     }
 
-    public void setParticipacoes(List<Participacao> participacoes) {
+    public void setParticipacoes(ParticipacaoList participacoes) {
         this.participacoes = participacoes;
     }
     
@@ -40,7 +41,7 @@ public class Avaliador{
         return true;
     }
     
-    public List<Arquivo> documentosParaAvaliar(){
+    public ArquivoList documentosParaAvaliar(){
         return null;
     }
 

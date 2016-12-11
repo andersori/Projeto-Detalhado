@@ -11,12 +11,27 @@ package modelo;
  */
 public class Arquivo {
     private int id;
+    private int id_evento;
     private int id_usuario;
     private String caminho;
     private String url;
 
-    
-    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId_evento() {
+        return id_evento;
+    }
+
+    public void setId_evento(int id_evento) {
+        this.id_evento = id_evento;
+    }
+
     public int getId_usuario() {
         return id_usuario;
     }
@@ -29,24 +44,17 @@ public class Arquivo {
         return caminho;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
     public void setCaminho(String caminho) {
         this.caminho = caminho;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     public void setUrl(String url) {
         this.url = url;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id){
-        this.id = id;
-    }  
     
 }

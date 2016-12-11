@@ -13,6 +13,7 @@ public class Competencia {
     private int id;
     private String titulo;
     private double valorMax;
+    private double valorObtido;
     private int peso;
     private String descricao;
 
@@ -36,6 +37,14 @@ public class Competencia {
         return valorMax;
     }
 
+    public double getValorObtido() {
+        return valorObtido;
+    }
+
+    public void setValorObtido(double valorObtido) {
+        this.valorObtido = valorObtido;
+    }
+    
     public void setValorMax(double valorMax) {
         this.valorMax = valorMax;
     }

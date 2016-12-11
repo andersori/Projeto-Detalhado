@@ -7,17 +7,17 @@ package br.com.pradoc.iterators;
 
 import java.util.Iterator;
 import java.util.List;
-import modelo.Usuario;
+import modelo.Avaliacao;
 
 /**
  *
  * @author Anderson
  */
-public class UsuarioListIterator implements Iterator{
-    private List<Usuario> lista;
+public class AvaliacaoListIterator implements Iterator<Object>{
+    private List<Avaliacao> lista;
     private int posicao;
-    
-    public UsuarioListIterator(List<Usuario> lista) {
+
+    public AvaliacaoListIterator(List<Avaliacao> lista) {
         this.lista = lista;
         this.posicao = 0;
     }
@@ -28,7 +28,7 @@ public class UsuarioListIterator implements Iterator{
     }
 
     @Override
-    public Usuario next() {
+    public Object next() {
         return lista.get(posicao++);
     }
     

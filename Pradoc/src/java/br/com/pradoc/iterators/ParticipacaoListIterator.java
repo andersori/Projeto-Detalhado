@@ -13,12 +13,13 @@ import modelo.Participacao;
  *
  * @author Anderson
  */
-public class ParticipacaoListIterator implements Iterator<Participacao>{
-    private final List<Participacao> lista;
+public class ParticipacaoListIterator implements Iterator{
+    private List<Participacao> lista;
     private int posiscao;
 
     public ParticipacaoListIterator(List<Participacao> lista) {
         this.lista = lista;
+        this.posiscao = 0;
     }
     
     @Override

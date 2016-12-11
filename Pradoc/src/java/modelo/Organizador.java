@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import br.com.pradoc.iterators.EventoList;
 import java.util.List;
 
 /**
@@ -13,19 +14,28 @@ import java.util.List;
  */
 public class Organizador{
     private Usuario usuario;
-    private List<Evento> eventos;
+    private EventoList eventos;
 
     public Organizador(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    public List<Evento> getEventos() {
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public EventoList getEventos() {
         return eventos;
     }
 
-    public void setEventos(List<Evento> eventos) {
+    public void setEventos(EventoList eventos) {
         this.eventos = eventos;
     }
+    
 
     //-----------------------------------------------------------------------------
     public boolean excluirEvento(Evento evento){
@@ -36,16 +46,8 @@ public class Organizador{
         return true;
     }
     
-    public Evento eventoEspecifico(Evento evento){
-        for(int i = 0; i< eventos.size(); i++){
-            Evento temp = eventos.get(i);
-            
-            if(evento.getId() == temp.getId()){
-                return temp;
-            }
-        }
-        
-        return null;
+    public Evento eventoEspecifico(int index){
+        return eventos.getItem(index);
     }
     
 }

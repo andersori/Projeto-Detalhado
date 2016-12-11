@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import br.com.pradoc.iterators.CompetenciaList;
 import java.util.List;
 
 /**
@@ -13,8 +14,7 @@ import java.util.List;
  */
 public class Avaliacao {
     private int id;
-    private List<Competencia> conceitos;
-    private float notaFinal;
+    private CompetenciaList conceitos;
     private float valorObitido;
     private String observacao;
     
@@ -26,22 +26,15 @@ public class Avaliacao {
     public void setId(int id) {
         this.id = id;
     }
-    public List<Competencia> getConceitos() {
+
+    public CompetenciaList getConceitos() {
         return conceitos;
     }
 
-    public void setConceitos(List<Competencia> conceitos) {
+    public void setConceitos(CompetenciaList conceitos) {
         this.conceitos = conceitos;
     }
-
-    public float getNotaFinal() {
-        return notaFinal;
-    }
-
-    public void setNotaFinal(float notaFinal) {
-        this.notaFinal = notaFinal;
-    }
-
+    
     public float getValorObitido() {
         return valorObitido;
     }
