@@ -27,14 +27,14 @@ public class UsuarioDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO usuario (username, senha, nome, telefone, email, cpf, instituicao_de_ensino) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getSenha());
-            stmt.setString(3, user.getNome());
-            stmt.setString(4, user.getTelefone());
-            stmt.setString(5, user.getEmail());
-            stmt.setString(6, user.getCpf());
-            stmt.setString(7, user.getInstituicaoDeEnsino());
+            stmt = con.prepareStatement("INSERT INTO usuario (nome, telefone, email, cpf, instituicao_ensino, username, senha) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            stmt.setString(1, user.getNome());
+            stmt.setString(2, user.getTelefone());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getCpf());
+            stmt.setString(5, user.getInstituicaoDeEnsino());
+            stmt.setString(6, user.getUsername());
+            stmt.setString(7, user.getSenha());
             
             
             stmt.executeUpdate();
@@ -58,14 +58,14 @@ public class UsuarioDAO {
             while(rs.next()){
                 Usuario user = new Usuario();
                 
-                user.setCpf(rs.getString("cpf"));
-                user.setEmail(rs.getString("email"));
-                user.setInstituicaoDeEnsino(rs.getString("instituicao_de_ensino"));
+                user.setId(rs.getInt("id"));
                 user.setNome(rs.getString("nome"));
-                user.setSenha(rs.getString("senha"));
                 user.setTelefone(rs.getString("telefone"));
+                user.setEmail(rs.getString("email"));
+                user.setCpf(rs.getString("cpf"));
+                user.setInstituicaoDeEnsino(rs.getString("instituicao_ensino"));
                 user.setUsername(rs.getString("username"));
-                user.setId(rs.getInt("id_usuario"));
+                user.setSenha(rs.getString("senha"));
                 
                 usuarios.add(user);
             }
@@ -93,14 +93,14 @@ public class UsuarioDAO {
             if(rs.next()){
                 userEncontrado = new Usuario();
                 
-                userEncontrado.setCpf(rs.getString("cpf"));
-                userEncontrado.setEmail(rs.getString("email"));
-                userEncontrado.setInstituicaoDeEnsino(rs.getString("instituicao_de_ensino"));
+                userEncontrado.setId(rs.getInt("id"));
                 userEncontrado.setNome(rs.getString("nome"));
-                userEncontrado.setSenha(rs.getString("senha"));
                 userEncontrado.setTelefone(rs.getString("telefone"));
+                userEncontrado.setEmail(rs.getString("email"));
+                userEncontrado.setCpf(rs.getString("cpf"));
+                userEncontrado.setInstituicaoDeEnsino(rs.getString("instituicao_ensino"));
                 userEncontrado.setUsername(rs.getString("username"));
-                userEncontrado.setId(rs.getInt("id_usuario"));
+                userEncontrado.setSenha(rs.getString("senha"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -118,21 +118,21 @@ public class UsuarioDAO {
         Usuario userEncontrado = null;
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM usuario WHERE id_usuario = ?");
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE id = ?");
             stmt.setInt(1, user.getId());
             
             rs = stmt.executeQuery();
             if(rs.next()){
                 userEncontrado = new Usuario();
                 
-                userEncontrado.setCpf(rs.getString("cpf"));
-                userEncontrado.setEmail(rs.getString("email"));
-                userEncontrado.setInstituicaoDeEnsino(rs.getString("instituicao_de_ensino"));
+                userEncontrado.setId(rs.getInt("id"));
                 userEncontrado.setNome(rs.getString("nome"));
-                userEncontrado.setSenha(rs.getString("senha"));
                 userEncontrado.setTelefone(rs.getString("telefone"));
+                userEncontrado.setEmail(rs.getString("email"));
+                userEncontrado.setCpf(rs.getString("cpf"));
+                userEncontrado.setInstituicaoDeEnsino(rs.getString("instituicao_ensino"));
                 userEncontrado.setUsername(rs.getString("username"));
-                userEncontrado.setId(rs.getInt("id_usuario"));
+                userEncontrado.setSenha(rs.getString("senha"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -158,14 +158,14 @@ public class UsuarioDAO {
             if(rs.next()){
                 userEncontrado = new Usuario();
                 
-                userEncontrado.setCpf(rs.getString("cpf"));
-                userEncontrado.setEmail(rs.getString("email"));
-                userEncontrado.setInstituicaoDeEnsino(rs.getString("instituicao_de_ensino"));
+                userEncontrado.setId(rs.getInt("id"));
                 userEncontrado.setNome(rs.getString("nome"));
-                userEncontrado.setSenha(rs.getString("senha"));
                 userEncontrado.setTelefone(rs.getString("telefone"));
+                userEncontrado.setEmail(rs.getString("email"));
+                userEncontrado.setCpf(rs.getString("cpf"));
+                userEncontrado.setInstituicaoDeEnsino(rs.getString("instituicao_ensino"));
                 userEncontrado.setUsername(rs.getString("username"));
-                userEncontrado.setId(rs.getInt("id_usuario"));
+                userEncontrado.setSenha(rs.getString("senha"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -181,7 +181,7 @@ public class UsuarioDAO {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("UPDATE usuario SET username = ?, senha = ?, nome = ?, telefone = ?, email = ?, cpf = ?, instituicao_de_ensino = ? WHERE id_usuario = ?");
+            stmt = con.prepareStatement("UPDATE usuario SET username = ?, senha = ?, nome = ?, telefone = ?, email = ?, cpf = ?, instituicao_ensino = ? WHERE id_usuario = ?");
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getSenha());
             stmt.setString(3, user.getNome());
