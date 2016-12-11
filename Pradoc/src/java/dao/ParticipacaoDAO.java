@@ -64,8 +64,9 @@ public class ParticipacaoDAO {
                 retorno.setStatus(rs.getString("status"));
                 retorno.setValido(rs.getBoolean("valido"));    
                 
-                //FALTA PEGAR O OBJETO EVENTO (ESPERANDO A CLASSE EVENTODAO)
                 
+                EventoDAO evento=new EventoDAO();
+                retorno.setEvento(evento.selectId(rs.getInt("id_evento")));
                 
                 ArquivoDAO arquivoDao=new ArquivoDAO();//PEGANDO O ARQUIVO PELO SEU ID
                 retorno.setArquivo(arquivoDao.selectArquivoID(rs.getInt("id_arquivo")));
@@ -127,7 +128,8 @@ public class ParticipacaoDAO {
                 }
                 participacao.setAvaliacoes(avaliacao);
                 
-                //falta pegar o evento
+                EventoDAO evento=new EventoDAO();
+                participacao.setEvento(evento.selectId(rs.getInt("id_evento")));
                 
                 EmailParticipacaoDAO buscarEmails=new EmailParticipacaoDAO();//PEGANDO OS EMAILS DA PARTICIPAÇAO
                 participacao.setEmailsUsuarios(buscarEmails.selectALL(participacao));
