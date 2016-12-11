@@ -19,7 +19,7 @@ public class Usuario {
     private String username;
     private String senha;
     private String instituicaoDeEnsino;
-    private List<String> especializacao;
+    private List<Formacao> especializacao;
 
     public int getId() {
         return id;
@@ -117,11 +117,11 @@ public class Usuario {
         this.instituicaoDeEnsino = instituicaoDeEnsino;
     }
 
-    public List<String> getEspecializacao() {
+    public List<Formacao> getEspecializacao() {
         return especializacao;
     }
 
-    public void setEspecializacao(List<String> especializacao) {
+    public void setEspecializacao(List<Formacao> especializacao) {
         this.especializacao = especializacao;
     }
     

@@ -6,40 +6,38 @@
 package modelo;
 
 import br.com.pradoc.iterators.CompetenciaList;
-import java.util.List;
 
 /**
  *
  * @author Anderson
  */
 public class Avaliacao {
-    private int id;
-    private CompetenciaList conceitos;
-    private float valorObitido;
+    private int id_participacao;
+    private int id_competencia;
+    private double valorObitido;
     private String observacao;
-    
 
-    public int getId() {
-        return id;
+    public int getId_participacao() {
+        return id_participacao;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_participacao(int id_participacao) {
+        this.id_participacao = id_participacao;
     }
 
-    public CompetenciaList getConceitos() {
-        return conceitos;
+    public int getId_competencia() {
+        return id_competencia;
     }
 
-    public void setConceitos(CompetenciaList conceitos) {
-        this.conceitos = conceitos;
+    public void setId_competencia(int id_competencia) {
+        this.id_competencia = id_competencia;
     }
-    
-    public float getValorObitido() {
+
+    public double getValorObitido() {
         return valorObitido;
     }
 
-    public void setValorObitido(float valorObitido) {
+    public void setValorObitido(double valorObitido) {
         this.valorObitido = valorObitido;
     }
 
@@ -50,6 +48,5 @@ public class Avaliacao {
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
-    
     
 }

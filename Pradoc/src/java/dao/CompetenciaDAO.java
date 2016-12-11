@@ -5,6 +5,7 @@
  */
 package dao;
 
+import br.com.pradoc.iterators.CompetenciaList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,18 +22,32 @@ import modelo.Evento;
  * @author Anderson
  */
 public class CompetenciaDAO {
+    /*
+    +-----------+--------------+------+-----+---------+-------+
+    | Field     | Type         | Null | Key | Default | Extra |
+    +-----------+--------------+------+-----+---------+-------+
+    | id        | int(11)      | NO   | PRI | NULL    |       |
+    | id_evento | int(11)      | NO   | MUL | NULL    |       |
+    | titulo    | varchar(45)  | NO   |     | NULL    |       |
+    | valor_max | decimal(6,2) | NO   |     | NULL    |       |
+    | peso      | int(11)      | YES  |     | NULL    |       |
+    | descricao | text         | YES  |     | NULL    |       |
+    +-----------+--------------+------+-----+---------+-------+
+    */
+    
     public void insert(Competencia competencia, Evento evento){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO competecnia (id_evento, descricao, valor_max, peso, titulo) VALUES (?, ?, ?, ?, ?)");
+            stmt = con.prepareStatement("INSERT INTO competecnia (id, id_evento, titulo, valor_max, peso, descricao) VALUES (?, ?, ?, ?, ?)");
             
-            stmt.setInt(1, evento.getId());
-            stmt.setString(2, competencia.getDescricao());
-            stmt.setDouble(3, competencia.getValorMax());
-            stmt.setInt(4, competencia.getPeso());
-            stmt.setString(5, competencia.getTitulo());
+            stmt.setInt(1, competencia.getId());
+            stmt.setInt(2, evento.getId());
+            stmt.setString(3, competencia.getTitulo());
+            stmt.setDouble(4, competencia.getValorMax());
+            stmt.setInt(5, competencia.getPeso());
+            stmt.setString(6, competencia.getDescricao());
             
             stmt.executeUpdate();
             
@@ -43,11 +58,11 @@ public class CompetenciaDAO {
         }
     }
     
-    public List<Competencia> selectALL(){
+    public CompetenciaList selectALL(){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Competencia> competencias = new ArrayList<>();
+        CompetenciaList competencias = new CompetenciaList();
         
         try {
             stmt = con.prepareStatement("SELECT * FROM competencia");
@@ -56,12 +71,15 @@ public class CompetenciaDAO {
             while(rs.next()){
                 Competencia competencia = new Competencia();
                 
+                competencia.setId(rs.getInt("id"));
+                competencia.setIdEvento(rs.getInt("id_evento"));
                 competencia.setDescricao(rs.getString("descicao"));
                 competencia.setPeso(rs.getInt("peso"));
                 competencia.setValorMax(rs.getDouble("valor_max"));
                 competencia.setTitulo(rs.getString("titulo"));
-                competencia.setId(rs.getInt("id_competencia"));
-                competencias.add(competencia);
+                
+                
+                competencias.append(competencia);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CompetenciaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,28 +90,30 @@ public class CompetenciaDAO {
         return competencias;
     }
     
-    public List<Competencia> selectTitulo(String titulo){
+    public CompetenciaList selectIdEvento(Evento evento){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        ArrayList<Competencia> competencias = new ArrayList<>();
+        CompetenciaList competencias = new CompetenciaList();
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM competencia WHERE titulo = '%?%'");
+            stmt = con.prepareStatement("SELECT * FROM competencia WHERE id_evento = ?");
             
-            stmt.setString(1, titulo);
+            stmt.setInt(1, evento.getId());
             
             rs = stmt.executeQuery();
             
             if(rs.next()){
                 Competencia competencia = new Competencia();
                 
+                competencia.setId(rs.getInt("id"));
+                competencia.setIdEvento(rs.getInt("id_evento"));
                 competencia.setDescricao(rs.getString("descicao"));
                 competencia.setPeso(rs.getInt("peso"));
                 competencia.setValorMax(rs.getDouble("valor_max"));
                 competencia.setTitulo(rs.getString("titulo"));
-                competencia.setId(rs.getInt("id_competencia"));
-                competencias.add(competencia);
+                
+                competencias.append(competencia);
             }
          
         } catch (SQLException ex) {
@@ -112,7 +132,7 @@ public class CompetenciaDAO {
         Competencia competencia = null;
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM competencia WHERE id_competencia = '?'");
+            stmt = con.prepareStatement("SELECT * FROM competencia WHERE id = ?");
             
             stmt.setInt(1, id);
             
@@ -121,11 +141,12 @@ public class CompetenciaDAO {
             if(rs.next()){
                 competencia = new Competencia();
                 
+                competencia.setId(rs.getInt("id"));
+                competencia.setIdEvento(rs.getInt("id_evento"));
                 competencia.setDescricao(rs.getString("descicao"));
                 competencia.setPeso(rs.getInt("peso"));
                 competencia.setValorMax(rs.getDouble("valor_max"));
                 competencia.setTitulo(rs.getString("titulo"));
-                competencia.setId(rs.getInt("id_competencia"));
             }
          
         } catch (SQLException ex) {

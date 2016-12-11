@@ -11,7 +11,6 @@ package modelo;
  */
 public class Arquivo {
     private int id;
-    private int id_evento;
     private int id_usuario;
     private String caminho;
     private String url;
@@ -22,14 +21,6 @@ public class Arquivo {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getId_evento() {
-        return id_evento;
-    }
-
-    public void setId_evento(int id_evento) {
-        this.id_evento = id_evento;
     }
 
     public int getId_usuario() {

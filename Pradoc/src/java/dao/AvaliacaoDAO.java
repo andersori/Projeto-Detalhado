@@ -5,33 +5,41 @@
  */
 package dao;
 
+import br.com.pradoc.iterators.AvaliacaoList;
 import java.sql.Connection;
 import modelo.Avaliacao;
-import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.Competencia;
 
 /**
  *
  * @author Douglas
  */
 public class AvaliacaoDAO {
+    /*
+    +-----------------+--------------+------+-----+---------+-------+
+    | Field           | Type         | Null | Key | Default | Extra |
+    +-----------------+--------------+------+-----+---------+-------+
+    | id_competencia  | int(11)      | NO   | MUL | NULL    |       |
+    | id_participacao | int(11)      | NO   | MUL | NULL    |       |
+    | valor_obtido    | decimal(6,2) | YES  |     | NULL    |       |
+    | observacao      | text         | YES  |     | NULL    |       |
+    +-----------------+--------------+------+-----+---------+-------+
+    */
     
     public void insert(Avaliacao av){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt=con.prepareStatement("INSERT INTO avaliacao(conceitos, notaFinal, valorObtido, observacao,id_competencia, id_participacao,id_usuario,) VALUES (?, ?, ?, ?)");
-            stmt.setArray(1, (Array) av.getConceitos());
-            stmt.setFloat(2, av.getNotaFinal());
-            stmt.setFloat(3, av.getValorObitido());
+            stmt=con.prepareStatement("INSERT INTO avaliacao(id_competencia, id_participacao, valor_obtido, observacao) VALUES (?, ?, ?, ?)");
+            stmt.setInt(1, av.getId_competencia());
+            stmt.setInt(2, av.getId_participacao());
+            stmt.setDouble(3, av.getValorObitido());
             stmt.setString(4, av.getObservacao());
+
             stmt.executeUpdate();
             
         } catch (SQLException ex) {
@@ -41,23 +49,25 @@ public class AvaliacaoDAO {
         }
         
     }
-    public List<Avaliacao> selectAll(){
+    
+    public AvaliacaoList selectAll(){
         Connection con=ConnectionFactory.getConnection();
         PreparedStatement stmt=null;
         ResultSet rs=null;
-        List<Avaliacao> avaliacoes=new ArrayList<>();
+        AvaliacaoList avaliacoes = new AvaliacaoList();
+        
         try {
             stmt=con.prepareStatement("SELECT *FROM avaliacao");
             rs=stmt.executeQuery();
             
             while(rs.next()){
-                Avaliacao av=new Avaliacao();
-                av.setConceitos((List<Competencia>) rs.getArray("conceitos"));
-                av.setNotaFinal(rs.getFloat("notaFinal"));
-                av.setValorObitido(rs.getFloat("valorObtido"));
+                Avaliacao av = new Avaliacao();
+                av.setId_competencia(rs.getInt("id_comptencia"));
+                av.setId_participacao(rs.getInt("id_participacao"));
+                av.setValorObitido(rs.getDouble("valor_obtido"));
                 av.setObservacao(rs.getString("observacao"));
-                avaliacoes.add(av);               
                 
+                avaliacoes.append(av);               
             }
         } catch (SQLException ex) {
             Logger.getLogger(AvaliacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,15 +76,17 @@ public class AvaliacaoDAO {
         }
         return avaliacoes;        
     }
+    
     public void update(Avaliacao av){
         Connection con=ConnectionFactory.getConnection();
         PreparedStatement stmt=null;
         try {
-            stmt=con.prepareStatement("UPDATE avaliacao SET conceitos=?,notaFinal=?,valorObtido=?,observacao=?");
-            stmt.setArray(1, (Array) av.getConceitos());
-            stmt.setFloat(2, av.getNotaFinal());
-            stmt.setFloat(3, av.getValorObitido());
+            stmt=con.prepareStatement("UPDATE avaliacao SET id_competencia=?,id_participacao=?,valor_obtido=?,observacao=?");
+            stmt.setInt(1, av.getId_competencia());
+            stmt.setInt(2, av.getId_participacao());
+            stmt.setDouble(3, av.getValorObitido());
             stmt.setString(4, av.getObservacao());
+            
             stmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AvaliacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,13 +95,16 @@ public class AvaliacaoDAO {
         }
         
     }
+    
     public void delete(Avaliacao av){
         Connection con=ConnectionFactory.getConnection();
         PreparedStatement stmt=null;
          
         try {
-            stmt=con.prepareStatement("DELETE FROM avaliacao WHERE id=?");
-            stmt.setInt(1, av.getId());
+            stmt=con.prepareStatement("DELETE FROM avaliacao WHERE id_competencia = ? OR id_participacao = ?");
+            stmt.setInt(1, av.getId_competencia());
+            stmt.setInt(1, av.getId_participacao());
+            
             stmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AvaliacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,21 +112,24 @@ public class AvaliacaoDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    public Avaliacao select(int id){
+    
+    public Avaliacao select(int id_competencia, int id_participacao){
         Connection con=ConnectionFactory.getConnection();
-        PreparedStatement stmt=null;
-        ResultSet rs=null;
-        Avaliacao av=null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Avaliacao av = null;
         try {
-            stmt=con.prepareStatement("SELECT *FROM avaliacao WHERE id=?");
-            stmt.setInt(1, id);
+            stmt=con.prepareStatement("SELECT * FROM avaliacao WHERE id_competencia = ? OR id_participacao = ? ");
+            stmt.setInt(1, id_competencia);
+            stmt.setInt(2, id_participacao);
+            
             rs=stmt.executeQuery();
             
             if(rs.next()){
-                av=new Avaliacao();
-                av.setConceitos((List<Competencia>) rs.getArray("conceitos"));
-                av.setNotaFinal(rs.getFloat("notaFinal"));
-                av.setValorObitido(rs.getFloat("valorObtido"));
+                av = new Avaliacao();
+                av.setId_competencia(rs.getInt("id_comptencia"));
+                av.setId_participacao(rs.getInt("id_participacao"));
+                av.setValorObitido(rs.getDouble("valor_obtido"));
                 av.setObservacao(rs.getString("observacao"));
                 
             }
@@ -120,6 +138,8 @@ public class AvaliacaoDAO {
         }finally{
             ConnectionFactory.closeConnection(con,stmt,rs);
         }
+        
         return av;        
     }
+    
 }

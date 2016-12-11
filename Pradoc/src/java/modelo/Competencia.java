@@ -11,9 +11,9 @@ package modelo;
  */
 public class Competencia {
     private int id;
+    private int idEvento;
     private String titulo;
     private double valorMax;
-    private double valorObtido;
     private int peso;
     private String descricao;
 
@@ -25,6 +25,14 @@ public class Competencia {
         this.id = id;
     }
 
+    public int setIdEvento() {
+        return idEvento;
+    }
+
+    public void setIdEvento(int idEvento) {
+        this.idEvento = idEvento;
+    }
+    
     public String getTitulo() {
         return titulo;
     }
@@ -35,14 +43,6 @@ public class Competencia {
 
     public double getValorMax() {
         return valorMax;
-    }
-
-    public double getValorObtido() {
-        return valorObtido;
-    }
-
-    public void setValorObtido(double valorObtido) {
-        this.valorObtido = valorObtido;
     }
     
     public void setValorMax(double valorMax) {
