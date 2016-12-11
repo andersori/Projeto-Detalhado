@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Avaliacao;
+import modelo.Evento;
 import modelo.Participacao;
 
 /**
@@ -28,9 +29,9 @@ public class ParticipacaoDAO {
         PreparedStatement stmt=null;
         try{
         stmt=con.prepareStatement("INSERT INTO participacao(id_evento,id_arquivo,resultado_final,status,valido,) VALUES(?,?,?,?,?,?)");
-        stmt.setInt(1, participacao.getIdEvento());
-        stmt.setInt(2,participacao.getIdArquivo());
-        stmt.setFloat(3,participacao.getResultadoFinal());
+        stmt.setInt(1, participacao.getEvento().getId());
+        stmt.setInt(2,participacao.getArquivo().getId());
+        stmt.setDouble(3,participacao.getResultadoFinal());
         stmt.setString(4, participacao.getStatus());
         stmt.setBoolean(5, participacao.isValido());
         stmt.setBoolean(6, participacao.isRevisar());
@@ -58,31 +59,29 @@ public class ParticipacaoDAO {
             while(rs.next()){
                 Participacao retorno= new Participacao();
                 
-                retorno.setIdEvento(rs.getInt("id_evento"));
-                retorno.setIdArquivo(rs.getInt("id_arquivo"));
                 retorno.setId(rs.getInt("id"));
-                retorno.setResultadoFinal(rs.getFloat("resultado_final"));
+                retorno.setResultadoFinal(rs.getDouble("resultado_final"));
                 retorno.setRevisar(rs.getBoolean("revisar"));
                 retorno.setStatus(rs.getString("status"));
-                retorno.setValido(rs.getBoolean("valido"));                
+                retorno.setValido(rs.getBoolean("valido"));    
                 
-                stmt2=con.prepareStatement("SELECT FROM email_participacao WHERE id_participacao=?");
-                stmt2.setInt(1,rs.getInt("id"));
-                rsEmails=stmt2.executeQuery();
-                ArrayList<String> emails=new ArrayList<>();
-                while(rsEmails.next()){
-                    emails.add(rsEmails.getString("email"));
-                    }
-                retorno.setEmailsUsuarios(emails);
+                //FALTA PEGAR O OBJETO EVENTO (ESPERANDO A CLASSE EVENTODAO)
                 
-                stmt3=con.prepareStatement("SELECT FROM avalicao WHERE id_participacao=?");
+                
+                ArquivoDAO arquivoDao=new ArquivoDAO();//PEGANDO O ARQUIVO PELO SEU ID
+                retorno.setArquivo(arquivoDao.selectArquivoID(rs.getInt("id_arquivo")));
+                
+                stmt3=con.prepareStatement("SELECT *FROM avaliacao WHERE id_participacao=?");//PEGANDO TODAS AS AVALIACOES
                 stmt3.setInt(1,rs.getInt("id"));
                 rsAv=stmt3.executeQuery();
                 AvaliacaoList avaliacao=new AvaliacaoList();
                 while(rsAv.next()){
                     avaliacao.append(new Avaliacao(rsAv.getInt("id_participacao"),rsAv.getInt("id_competencia"),rsAv.getDouble("valor_obtido"),rsAv.getString("observacao")));
                 }
-                retorno.setAvaliacoes(avaliacao);             
+                retorno.setAvaliacoes(avaliacao); 
+                
+                EmailParticipacaoDAO buscarEmails=new EmailParticipacaoDAO();//PEGANDO OS EMAILS DA PARTICIPAÇAO
+                retorno.setEmailsUsuarios(buscarEmails.selectALL(retorno));
                 
                 participacoes.add(retorno);
             }
@@ -103,9 +102,9 @@ public class ParticipacaoDAO {
         PreparedStatement stmt = null;
         try{
             stmt=con.prepareStatement("UPDATE participacao SET id_evento=?,id_arquivo=?,resultado_final=?,status=?,valido=?,revisar=? WHERE id=?");
-            stmt.setInt(1, participacao.getIdEvento());
-            stmt.setInt(2, participacao.getIdArquivo());
-            stmt.setFloat(3, participacao.getResultadoFinal());
+            stmt.setInt(1, participacao.getEvento().getId());
+            stmt.setInt(2, participacao.getArquivo().getId());
+            stmt.setDouble(3, participacao.getResultadoFinal());
             stmt.setString(4,participacao.getStatus());
             stmt.setBoolean(5, participacao.isValido());
             stmt.setBoolean(6,participacao.isRevisar());

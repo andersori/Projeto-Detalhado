@@ -16,12 +16,12 @@ import java.util.List;
 public class Participacao {
     private int id;
     private List<String> emailsUsuarios;
-    private int idArquivo;
+    private Arquivo arquivo;
     private boolean valido;
     private String status;
-    private float resultadoFinal;
+    private double resultadoFinal;
     private AvaliacaoList avaliacoes;
-    private int idEvento;
+    private Evento evento;
     private boolean revisar;
 
     public boolean isRevisar() {
@@ -48,20 +48,20 @@ public class Participacao {
         this.emailsUsuarios = emailsUsuarios;
     }
 
-    public int getIdArquivo() {
-        return idArquivo;
+    public Arquivo getArquivo() {
+        return arquivo;
     }
 
-    public void setIdArquivo(int idArquivo) {
-        this.idArquivo = idArquivo;
+    public void setArquivo(Arquivo arquivo) {
+        this.arquivo = arquivo;
     }
 
-    public int getIdEvento() {
-        return idEvento;
+    public Evento getEvento() {
+        return evento;
     }
 
-    public void setIdEvento(int idEvento) {
-        this.idEvento = idEvento;
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 
     public boolean isValido() {
@@ -80,11 +80,11 @@ public class Participacao {
         this.status = status;
     }
 
-    public float getResultadoFinal() {
+    public double getResultadoFinal() {
         return resultadoFinal;
     }
 
-    public void setResultadoFinal(float resultadoFinal) {
+    public void setResultadoFinal(double resultadoFinal) {
         this.resultadoFinal = resultadoFinal;
     }
 
