@@ -5,7 +5,9 @@
  */
 package dao;
 
+import br.com.pradoc.iterators.UsuarioList;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,30 +29,36 @@ public class EventoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO evento(nome_evento,nota_de_aprovacao,descricao_evento,data_inicio_submicao,data_fim_submicao,data_inicio_avaliacao,data_fim_avaliacao,data_inicio_recurso,data_fim_recurso,data_resultado_do_recurso,instituicão,id_usuario_organizador,id_documento_modelo,hora_inicio_submissao,hora_fim_submissao,hora_inicio_avaliacao,hora_fim_avaliacao,hora_inicio_recurso,hora_fim_recurso");
-            stmt.setString(1, e.getNome());
-            stmt.setFloat(2, e.getNotaAprovacao());
-            stmt.setString(3, e.getDescricao());
-            stmt.setDate(4, e.getInicioSubmissao());
-            stmt.setDate(5, e.getFimSubmissao());
-            stmt.setDate(6, e.getInicioAvaliacao());
-            stmt.setDate(7, e.getFimAvaliacao());
-            stmt.setDate(8, e.getInicioRecurso());
-            stmt.setDate(9, e.getFimRecurso());
-            stmt.setDate(10, e.getResultadoRecurso());
-            stmt.setString(11, e.getInstituicao());
-            Organizador o = e.getOrganizador();
-            stmt.setInt(12, (o.getId()));
-
-            // stmt do arquivo
-            stmt.setTime(14, e.getHoraInicioSubmissao());
-            stmt.setTime(15, e.getHoraFimSubmissao());
-            stmt.setTime(16, e.getHoraInicioAvaliacao());
-            stmt.setTime(17, e.getHoraFimAvaliacao());
-            stmt.setTime(18, e.getHoraInicioRecurso());
-            stmt.setTime(19, e.getHoraFimRecurso());
-            // Ele manda tudo para o Banco
+            //id INT, nome STR, descricao STR, instituicao STR, notaDeAprovacao DOU, inicioSubmicao CAL, fimSubmicao CAL
+            //inicioAvaliacao CAL, fimAvaliacao CAL, inicioRecurso CAL, fimRecurso CAL
+            //organizador USUARIO, avaliadores USUARIOLIST, modeloDocumento ARQUIVO, competencias COMPETENCIASLIST
+            
+            //id , id_usuario_organizador INT, id_documento_modelo INT, nome STR, nota_de_aprovacao DECIMAL, descricao TEXT, 
+            //inicio_submicao D, fim_submicao D, inicio_avaliacao D, fim_avaliacao D, inicio_recurso D, fim_recurso D, instituicao STR
+            stmt = con.prepareStatement("INSERT INTO evento(id_usuario_organizador, id_documento_modelo, nome, nota_aprovacao, descricao, inicio_submicao, fim_submicao, inicio_avaliacao, fim_avaliacao, inicio_recurso, fim_recurso, instituicao) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            
+            stmt.setInt(1, e.getOrganizador().getId());
+            stmt.setInt(2, e.getModeloDocumento().getId());
+            stmt.setString(3, e.getNome());
+            stmt.setDouble(4, e.getNotaDeAprovacao());
+            stmt.setString(5, e.getDescricao());
+            stmt.setDate(6, (Date) e.getInicioSubimicao().getTime());
+            stmt.setDate(7, (Date) e.getFimSubmicao().getTime());
+            stmt.setDate(8, (Date) e.getInicioAvaliacao().getTime());
+            stmt.setDate(9, (Date) e.getFimAvaliacao().getTime());
+            stmt.setDate(10, (Date) e.getInicioRecurso().getTime());
+            stmt.setDate(11, (Date) e.getFimRecurso().getTime());
+            stmt.setString(12, e.getInstituicao());
+            
             stmt.executeUpdate();
+            UsuarioList ava = e.getAvaliadores();
+            AvaliadorDAO avaliadores = new AvaliadorDAO();
+            int i=0;
+            while(ava.getItem(i)!=null){
+                avaliadores.insert(ava.getItem(i),e);
+            }
+
+            
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

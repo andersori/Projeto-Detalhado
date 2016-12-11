@@ -76,6 +76,37 @@ public class AvaliadorDAO {
         
     }
     
+    public UsuarioList selectAllDeEvento(Evento e){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        UsuarioList avaliadores = null;
+        
+        try {
+            stmt = con.prepareStatement("SELECT DISTINCT * FROM avaliadores AS A, evento AS E WHERE A.id_evento = E.id AND E.id = ?");
+            stmt.setInt(1, e.getId());
+            rs = stmt.executeQuery();
+            avaliadores = new UsuarioList();
+            
+            while(rs.next()){
+                UsuarioDAO userDao = new UsuarioDAO();
+                Usuario user = new Usuario();
+                
+                user.setId(rs.getInt("id_usuario"));
+                user = userDao.selectId(user);
+                                
+                avaliadores.append(user);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AvaliadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        
+        return avaliadores;
+        
+    }
+    
     public void update(Usuario av, Evento ev){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

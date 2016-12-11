@@ -7,6 +7,7 @@ package modelo;
 
 import br.com.pradoc.iterators.CompetenciaList;
 import br.com.pradoc.iterators.UsuarioList;
+import java.sql.Date;
 import java.util.Calendar;
 
 /**
@@ -148,6 +149,26 @@ public class Evento {
 
     public void setCompetencias(CompetenciaList competencias) {
         this.competencias = competencias;
+    }
+
+    public void setInicioSubmissao(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setFimSubmissao(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setInicioSubmissao(Calendar cal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void getAvaliadores(UsuarioList selectAllDeEvento) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void getCompetencias(CompetenciaList selectIdEvento) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
