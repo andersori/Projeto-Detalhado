@@ -141,7 +141,7 @@ public class EventoDAO {
             
         try {
             stmt=con.prepareStatement("SELECT * FROM evento GROUP BY id_evento DESC");
-            rs=stmt.executeQuery();
+            rs = stmt.executeQuery();
             if(rs == null){
                 eventos=null;
             }else{
@@ -185,9 +185,28 @@ public class EventoDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
         }
-            
                     
             return eventos;
+    }
+        
+    public void delete(Evento e){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("DELETE FROM evento WHERE id = ?");
+            stmt.setInt(1, e.getId());
+           
+            stmt.executeUpdate(); 
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
         }
+    }
+        
 }
