@@ -6,10 +6,12 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Formacao;
@@ -31,8 +33,8 @@ public class FormacaoDAO {
             stmt.setInt(2,formacao.getIdAreaConhecimento());
             stmt.setString(3, formacao.getTipo());
             stmt.setString(4, formacao.getInstituicao());
-           //stmt.setDate(5,formacao.getDataInicio());
-           //stmt.setDate(6, formacao.getDataTermino());
+            stmt.setDate(5,(Date) formacao.getDataInicio().getTime());//PEGUEI ESSA LÓGICA PELO EDUARDO
+           stmt.setDate(6, (Date) formacao.getDataTermino().getTime());
            
            stmt.executeUpdate();
         }catch(SQLException ex){
@@ -66,8 +68,8 @@ public class FormacaoDAO {
            stmt.setInt(2, formacao.getIdAreaConhecimento());
            stmt.setString(3, formacao.getTipo());
            stmt.setString(4, formacao.getInstituicao());
-           //stmt.setDate(5, formacao.getDataInicio());
-           //stmt.setDate(6,formacao.getDataTermino());
+           stmt.setDate(5, (Date) formacao.getDataInicio().getTime());
+           stmt.setDate(6,(Date) formacao.getDataTermino().getTime());
            stmt.setInt(7, formacao.getIdUsuario());
            
            stmt.executeUpdate();
@@ -81,6 +83,7 @@ public class FormacaoDAO {
        Connection con = ConnectionFactory.getConnection();
        PreparedStatement stmt = null;
        ResultSet rs=null;
+       
        ArrayList<Formacao> retorno=new ArrayList<>();
        try{
            stmt=con.prepareStatement("SELECT *FROM formacao");
@@ -91,8 +94,14 @@ public class FormacaoDAO {
                temp.setIdAreaConhecimento(rs.getInt("id_area_conhecimento"));
                temp.setTipo(rs.getString("tipo"));
                temp.setInstituicao(rs.getString("instituicao"));
-               //temp.setDataInicio(rs.getDate("data_inicio"));
-               //temp.setDataTermino(rs.getDate("data_termino"));
+               
+               Calendar c = Calendar.getInstance();//NAO SEI SE VAI FUNCIONAR NAO
+               c.setTime(rs.getDate("data_inicio"));
+               temp.setDataInicio(c);
+               
+               Calendar c1=Calendar.getInstance();
+               c.setTime(rs.getDate("data_termino"));
+               temp.setDataTermino(c1);
                
                retorno.add(temp);
            }
