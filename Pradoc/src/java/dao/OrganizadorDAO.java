@@ -5,7 +5,6 @@
  */
 package dao;
 
-import connection.ConnectionFactory;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -5,7 +5,7 @@
  */
 package br.com.TestePradoc;
 import br.com.pradoc.iterators.UsuarioList;
-import connection.ConnectionFactory;
+import dao.ConnectionFactory;
 import dao.UsuarioDAO;
 import java.sql.Connection;
 import java.util.Iterator;
