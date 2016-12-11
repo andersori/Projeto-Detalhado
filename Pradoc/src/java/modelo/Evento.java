@@ -7,13 +7,15 @@ package modelo;
 
 import br.com.pradoc.iterators.CompetenciaList;
 import br.com.pradoc.iterators.UsuarioList;
+import br.com.pradoc.proxy.IEvento;
+import dao.AvaliacaoDAO;
 import java.util.Calendar;
 
 /**
  *
  * @author Anderson
  */
-public class Evento {
+public class Evento implements IEvento{
     private int id;
     private String nome;
     private String descricao;
@@ -148,6 +150,53 @@ public class Evento {
 
     public void setCompetencias(CompetenciaList competencias) {
         this.competencias = competencias;
+    }
+
+    @Override
+    public boolean definirConceito(Competencia conceito, Participacao part, double valor, String observacao) {
+        Avaliacao av = new Avaliacao();
+        AvaliacaoDAO dao = new AvaliacaoDAO();
+        
+    }
+
+    @Override
+    public boolean baixarArquivo(int id_arquivo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean excluir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean valiadarParticipacao(int idParticipacao) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean adicionarAvaliador(Usuario user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean removerAvaliador(Usuario user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean anexarModelo(Arquivo arq) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean distribuirArquivos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean requisiatarRevisao(Usuario user, Participacao part) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
