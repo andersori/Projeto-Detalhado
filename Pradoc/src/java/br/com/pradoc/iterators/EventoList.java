@@ -52,5 +52,10 @@ public class EventoList implements AbstractList<Evento>{
         }
         return null;
     }
+
+    @Override
+    public int size() {
+        return lista.size();
+    }
     
 }

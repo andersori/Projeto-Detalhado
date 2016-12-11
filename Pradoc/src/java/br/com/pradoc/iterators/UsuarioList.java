@@ -5,6 +5,7 @@
  */
 package br.com.pradoc.iterators;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -53,6 +54,11 @@ public class UsuarioList implements AbstractList<Usuario>{
         }
         
         return null;
+    }
+
+    @Override
+    public int size() {
+        return lista.size();
     }
     
 }

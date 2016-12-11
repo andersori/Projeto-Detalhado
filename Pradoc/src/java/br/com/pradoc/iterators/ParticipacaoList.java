@@ -54,5 +54,10 @@ public class ParticipacaoList implements AbstractList<Participacao>{
         
         return null;
     }
+
+    @Override
+    public int size() {
+        return lista.size();
+    }
     
 }

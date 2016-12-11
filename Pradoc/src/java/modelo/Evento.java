@@ -8,7 +8,12 @@ package modelo;
 import br.com.pradoc.iterators.CompetenciaList;
 import br.com.pradoc.iterators.UsuarioList;
 import br.com.pradoc.proxy.IEvento;
+import dao.ArquivoDAO;
 import dao.AvaliacaoDAO;
+import dao.AvaliadorDAO;
+import dao.EmailParticipacaoDAO;
+import dao.EventoDAO;
+import dao.ParticipacaoDAO;
 import java.util.Calendar;
 
 /**
@@ -152,46 +157,77 @@ public class Evento implements IEvento{
         this.competencias = competencias;
     }
 
-    @Override
-    public boolean definirConceito(Competencia conceito, Participacao part, double valor, String observacao) {
+    @Override   /*OK*/
+    public void definirConceito(Competencia conceito, Participacao part, double valor, String observacao) {
         Avaliacao av = new Avaliacao();
         AvaliacaoDAO dao = new AvaliacaoDAO();
         
+        av.setId_competencia(conceito.getId());
+        av.setId_participacao(part.getId());
+        av.setObservacao(observacao);
+        av.setValorObitido(valor);
+        
+        dao.insert(av);
+        
     }
 
-    @Override
-    public boolean baixarArquivo(int id_arquivo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override   /*OK*/
+    public String baixarArquivo(int id_arquivo) {
+        ArquivoDAO dao = new ArquivoDAO();
+        Arquivo arq = dao.selectArquivoID(id_arquivo);
+        
+        return arq.getCaminho();
     }
 
-    @Override
+    @Override   /*FALTA*/
     public boolean excluir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EventoDAO dao = new EventoDAO();
+        
+        //Utilizar o remove do vento
+        
+        return true;
     }
 
-    @Override
+    @Override   /*FALTA*/
     public boolean valiadarParticipacao(int idParticipacao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ParticipacaoDAO dao = new ParticipacaoDAO();
+        Participacao p = new Participacao();
+        
+        dao.update(p);
+        
+        return true;
     }
 
-    @Override
+    @Override   /*OK*/
     public boolean adicionarAvaliador(Usuario user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        AvaliadorDAO dao =  new AvaliadorDAO();
+        dao.insert(user, this);
+        
+        return true;
     }
 
-    @Override
+    @Override   /*OK*/
     public boolean removerAvaliador(Usuario user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        AvaliadorDAO dao = new AvaliadorDAO();
+        dao.delete(user);
+        return true;
     }
 
     @Override
     public boolean anexarModelo(Arquivo arq) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArquivoDAO dao = new ArquivoDAO();
+        dao.insert(arq, this.organizador);
+        
+        this.modeloDocumento = arq;
+        return true;
     }
 
-    @Override
+    @Override   /*Falta*/
     public boolean distribuirArquivos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        AvaliadorDAO dao = new AvaliadorDAO();
+        UsuarioList avaliadores = dao.selectAll();
+        
+        
     }
 
     @Override

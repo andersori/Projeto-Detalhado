@@ -17,4 +17,5 @@ public interface AbstractList<Tipo> {
     public boolean append(Tipo item);
     public Tipo remove(int index);
     public Tipo getItem(int index);
+    public int size();
 }

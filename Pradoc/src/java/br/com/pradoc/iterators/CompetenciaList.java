@@ -52,5 +52,10 @@ public class CompetenciaList implements AbstractList<Competencia>{
         }
         return null;
     }
+
+    @Override
+    public int size() {
+        return lista.size();
+    }
     
 }

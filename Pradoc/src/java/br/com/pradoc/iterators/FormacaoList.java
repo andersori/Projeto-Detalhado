@@ -52,5 +52,10 @@ public class FormacaoList implements AbstractList<Formacao>{
         }
         return null;
     }
+
+    @Override
+    public int size() {
+        return lista.size();
+    }
     
 }

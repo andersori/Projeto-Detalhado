@@ -52,5 +52,10 @@ public class AvaliacaoList implements AbstractList<Avaliacao>{
         }
         return null;
     }
+
+    @Override
+    public int size() {
+        return lista.size();
+    }
     
 }

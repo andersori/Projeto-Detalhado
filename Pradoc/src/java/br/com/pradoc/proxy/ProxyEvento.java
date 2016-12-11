@@ -26,24 +26,24 @@ public class ProxyEvento implements IEvento{
     }
 
     @Override
-    public boolean definirConceito(Competencia conceito, Participacao part, double valor, String observacao) {
+    public void definirConceito(Competencia conceito, Participacao part, double valor, String observacao) {
         //Se tiver permição
         if(true){
-            return evento.definirConceito(conceito, part, valor, observacao);            
+            evento.definirConceito(conceito, part, valor, observacao);            
         }
         else{
-            return false;
+            return;
         }
     }
 
     @Override
-    public boolean baixarArquivo(int id_arquivo) {
+    public String baixarArquivo(int id_arquivo) {
         //Se tiver permição
         if(true){
             return evento.baixarArquivo(id_arquivo);
         }
         else{
-            return false;
+            return null;
         }
     }
 

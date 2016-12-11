@@ -52,5 +52,10 @@ public class ArquivoList implements AbstractList<Arquivo>{
         }
         return null;
     }
+
+    @Override
+    public int size() {
+        return lista.size();
+    }
     
 }
