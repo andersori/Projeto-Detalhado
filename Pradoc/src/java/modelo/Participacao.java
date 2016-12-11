@@ -19,8 +19,18 @@ public class Participacao {
     private Arquivo arquivo;
     private boolean valido;
     private String status;
-    private float resultadoFinal;
+    private double resultadoFinal;
     private AvaliacaoList avaliacoes;
+    private Evento evento;
+    private boolean revisar;
+
+    public boolean isRevisar() {
+        return revisar;
+    }
+
+    public void setRevisar(boolean revisar) {
+        this.revisar = revisar;
+    }
 
     public int getId() {
         return id;
@@ -46,6 +56,14 @@ public class Participacao {
         this.arquivo = arquivo;
     }
 
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+
     public boolean isValido() {
         return valido;
     }
@@ -62,11 +80,11 @@ public class Participacao {
         this.status = status;
     }
 
-    public float getResultadoFinal() {
+    public double getResultadoFinal() {
         return resultadoFinal;
     }
 
-    public void setResultadoFinal(float resultadoFinal) {
+    public void setResultadoFinal(double resultadoFinal) {
         this.resultadoFinal = resultadoFinal;
     }
 

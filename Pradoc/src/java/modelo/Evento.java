@@ -19,7 +19,7 @@ public class Evento {
     private String nome;
     private String descricao;
     private String instituicao;
-    private double notaDeAprovacao;
+    private float notaDeAprovacao;
     private Calendar inicioSubimicao;
     private Calendar fimSubmicao;
     private Calendar inicioAvaliacao;
@@ -67,7 +67,7 @@ public class Evento {
         return notaDeAprovacao;
     }
 
-    public void setNotaDeAprovacao(double notaDeAprovacao) {
+    public void setNotaDeAprovacao(float notaDeAprovacao) {
         this.notaDeAprovacao = notaDeAprovacao;
     }
 
@@ -151,26 +151,4 @@ public class Evento {
         this.competencias = competencias;
     }
 
-    public void setInicioSubmissao(Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setFimSubmissao(Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setInicioSubmissao(Calendar cal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void getAvaliadores(UsuarioList selectAllDeEvento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void getCompetencias(CompetenciaList selectIdEvento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
 }   
-

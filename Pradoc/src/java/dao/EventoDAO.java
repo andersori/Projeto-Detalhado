@@ -5,6 +5,7 @@
  */
 package dao;
 
+import br.com.pradoc.iterators.CompetenciaList;
 import br.com.pradoc.iterators.UsuarioList;
 import java.sql.Connection;
 import java.sql.Date;
@@ -12,11 +13,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Evento;
-import modelo.Usuario;
 
 /**
  *
@@ -51,13 +52,21 @@ public class EventoDAO {
             stmt.setString(12, e.getInstituicao());
             
             stmt.executeUpdate();
+            
             UsuarioList ava = e.getAvaliadores();
             AvaliadorDAO avaliadores = new AvaliadorDAO();
             int i=0;
             while(ava.getItem(i)!=null){
                 avaliadores.insert(ava.getItem(i),e);
             }
-
+            
+            CompetenciaList comp = e.getCompetencias();
+            CompetenciaDAO competencias = new CompetenciaDAO();
+            i = 0;
+            while(comp.getItem(i) != null){
+                competencias.insert(comp.getItem(i), e);
+            }
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,20 +88,34 @@ public class EventoDAO {
             rs = stmt.executeQuery();
             
             if(rs.next()){
-                e=new Evento();
-                e.setId(rs.getInt("id_evento"));
-                e.setNome(rs.getString("nome_evento"));
-                e.setNotaAprovacao(rs.getFloat("nota_de_aprovacao"));
-                e.setDescricao(rs.getString("descricao_evento"));
-                e.setInicioSubmissao(rs.getDate("data_inicio_submissao"));
-                e.setFimSubmissao(rs.getDate("data_fim_submicao"));
-                e.setInicioAvaliacao(rs.getDate("data_inicio_avaliacao"));
-                e.setFimAvaliacao(rs.getDate("data_fim_avaliacao"));
-                e.setInicioRecurso(rs.getDate("data_inicio_recurso"));
-                e.setFimRecurso(rs.getDate("data_fim_recurso"));
-                e.setResultadoRecurso(rs.getDate("data_resultado_do_recurso"));
+                e = new Evento();
+                e.setId(rs.getInt("id"));
+                e.setNome(rs.getString("nome"));
+                e.setNotaDeAprovacao(rs.getFloat("nota_aprovacao"));
+                e.setDescricao(rs.getString("descricao"));
                 e.setInstituicao(rs.getString("instituicão"));
+                
+                Calendar calIS = Calendar.getInstance();
+                calIS.setTime(rs.getDate("inicio_submicao"));
+                e.setInicioSubimicao(calIS);
+                Calendar calFS = Calendar.getInstance();
+                calFS.setTime(rs.getDate("fim_submicao"));
+                e.setFimSubmicao(calFS);
+                Calendar calIA = Calendar.getInstance();
+                calIA.setTime(rs.getDate("inicio_avaliacao"));
+                e.setInicioAvaliacao(calIA);
+                Calendar calFA = Calendar.getInstance();
+                calFA.setTime(rs.getDate("fim_avaliacao"));
+                e.setFimAvaliacao(calFA);
+                Calendar calIR = Calendar.getInstance();
+                calIR.setTime(rs.getDate("inicio_recurso"));
+                e.setInicioSubimicao(calIR);
+                Calendar calFR = Calendar.getInstance();
+                calFR.setTime(rs.getDate("fim_recurso"));
+                e.setInicioSubimicao(calFR);
                 // falta a opção que eu passo o ID e ele Cria o Organizador e tbm a do documento.
+                
+                
                 
             }
         } catch (SQLException ex) {

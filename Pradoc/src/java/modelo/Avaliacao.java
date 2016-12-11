@@ -5,7 +5,6 @@
  */
 package modelo;
 
-import br.com.pradoc.iterators.CompetenciaList;
 
 /**
  *
@@ -16,7 +15,17 @@ public class Avaliacao {
     private int id_competencia;
     private double valorObitido;
     private String observacao;
+    
+    public Avaliacao(int id_participacao,int id_competencia, double valorObitido, String observacao){
+        this.id_participacao=id_participacao;
+        this.id_competencia=id_competencia;
+        this.valorObitido=valorObitido;
+        this.observacao=observacao;
+    }
 
+    public Avaliacao() {
+        
+    }
     public int getId_participacao() {
         return id_participacao;
     }

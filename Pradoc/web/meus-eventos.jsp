@@ -36,6 +36,7 @@
                                 <li class="active"><a href="index.html">Home</a></li>
                                 <li><a href="meus-eventos.jsp">Meus Eventos</a></li>
                                 <li><a href="avaliacoes.jsp">Avaliações</a></li>
+                                <li><a href="perfil.jsp">Edite seu perfil</a></li>
                                 <li><a href="login.jsp">Fazer Login</a></li>
                             </ul>
                         </div>

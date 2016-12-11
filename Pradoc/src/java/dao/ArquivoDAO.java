@@ -91,6 +91,34 @@ public class ArquivoDAO {
         
         return arquivos;
     }
+    public Arquivo selectArquivoID(int id){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null ;
+        ResultSet rs = null;
+        Arquivo arq = null;
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM arquivo WHERE id= ?");
+            stmt.setInt(1, id);
+            
+            rs = stmt.executeQuery();
+            if( rs.next()){
+                arq = new Arquivo();
+                
+                arq.setCaminho(rs.getString("caminho"));
+                arq.setUrl(rs.getString("url"));
+                arq.setId_usuario(rs.getInt("id_usuario"));
+                arq.setId(rs.getInt("id"));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ArquivoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+        
+        return arq;
+    }
     
     public Arquivo selectIdUsuario(Usuario user){
         Connection con = ConnectionFactory.getConnection();
