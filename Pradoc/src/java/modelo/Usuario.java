@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import br.com.pradoc.iterators.UsuarioList;
 import java.util.List;
 /**
  *
@@ -19,7 +20,7 @@ public class Usuario {
     private String username;
     private String senha;
     private String instituicaoDeEnsino;
-    private List<Formacao> especializacao;
+    private UsuarioList especializacao;
 
     public int getId() {
         return id;
@@ -117,11 +118,11 @@ public class Usuario {
         this.instituicaoDeEnsino = instituicaoDeEnsino;
     }
 
-    public List<Formacao> getEspecializacao() {
+    public UsuarioList getEspecializacao() {
         return especializacao;
     }
 
-    public void setEspecializacao(List<Formacao> especializacao) {
+    public void setEspecializacao(UsuarioList especializacao) {
         this.especializacao = especializacao;
     }
     
