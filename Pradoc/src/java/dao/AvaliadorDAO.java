@@ -130,9 +130,5 @@ public class AvaliadorDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-
-    UsuarioList selectIdEvento(Evento e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

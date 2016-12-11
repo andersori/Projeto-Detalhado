@@ -6,7 +6,6 @@
 package dao;
 
 import br.com.pradoc.iterators.AvaliacaoList;
-import br.com.pradoc.iterators.UsuarioList;
 import java.sql.Connection;
 import modelo.Avaliacao;
 import java.sql.PreparedStatement;
@@ -14,8 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.Evento;
-import modelo.Usuario;
 
 /**
  *
@@ -78,38 +75,6 @@ public class AvaliacaoDAO {
             ConnectionFactory.closeConnection(con,stmt,rs);
         }
         return avaliacoes;        
-    }
-    
-    
-public UsuarioList selectIdEvento(Evento e){
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        UsuarioList avaliadores = null;
-        
-        try {
-            stmt = con.prepareStatement("SELECT DISTINCT * FROM avaliadores AS A, evento AS E WHERE A.id_evento = E.id AND E.id = ?");
-            stmt.setInt(1, e.getId());
-            rs = stmt.executeQuery();
-            avaliadores = new UsuarioList();
-            
-            while(rs.next()){
-                UsuarioDAO userDao = new UsuarioDAO();
-                Usuario user = new Usuario();
-                
-                user.setId(rs.getInt("id_usuario"));
-                user = userDao.selectId(user);
-                                
-                avaliadores.append(user);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AvaliadorDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
-        }
-        
-        return avaliadores;
-        
     }
     
     public void update(Avaliacao av){

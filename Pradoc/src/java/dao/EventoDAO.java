@@ -30,7 +30,13 @@ public class EventoDAO {
         PreparedStatement stmt = null;
 
         try {
-             stmt = con.prepareStatement("INSERT INTO evento(id_usuario_organizador, id_documento_modelo, nome, nota_aprovacao, descricao, inicio_submicao, fim_submicao, inicio_avaliacao, fim_avaliacao, inicio_recurso, fim_recurso, instituicao) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            //id INT, nome STR, descricao STR, instituicao STR, notaDeAprovacao DOU, inicioSubmicao CAL, fimSubmicao CAL
+            //inicioAvaliacao CAL, fimAvaliacao CAL, inicioRecurso CAL, fimRecurso CAL
+            //organizador USUARIO, avaliadores USUARIOLIST, modeloDocumento ARQUIVO, competencias COMPETENCIASLIST
+            
+            //id , id_usuario_organizador INT, id_documento_modelo INT, nome STR, nota_de_aprovacao DECIMAL, descricao TEXT, 
+            //inicio_submicao D, fim_submicao D, inicio_avaliacao D, fim_avaliacao D, inicio_recurso D, fim_recurso D, instituicao STR
+            stmt = con.prepareStatement("INSERT INTO evento(id_usuario_organizador, id_documento_modelo, nome, nota_aprovacao, descricao, inicio_submicao, fim_submicao, inicio_avaliacao, fim_avaliacao, inicio_recurso, fim_recurso, instituicao) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
             stmt.setInt(1, e.getOrganizador().getId());
             stmt.setInt(2, e.getModeloDocumento().getId());
@@ -107,12 +113,6 @@ public class EventoDAO {
                 Calendar calFR = Calendar.getInstance();
                 calFR.setTime(rs.getDate("fim_recurso"));
                 e.setInicioSubimicao(calFR);
-                
-                AvaliadorDAO avaliadores = new AvaliadorDAO();
-                e.setAvaliadores(avaliadores.selectAll());
-                
-                CompetenciaDAO comp = new CompetenciaDAO();
-                e.setCompetencias(comp.selectIdEvento(e));
                 // falta a opção que eu passo o ID e ele Cria o Organizador e tbm a do documento.
                 
                 
@@ -120,9 +120,7 @@ public class EventoDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
-            ConnectionFactory.closeConnection(con, stmt, rs);
-        }
+        }         
                 
             return e;
         }
@@ -137,42 +135,22 @@ public class EventoDAO {
             stmt=con.prepareStatement("SELECT * FROM evento GROUP BY id_evento DESC");
             rs=stmt.executeQuery();
             if(rs == null){
-                eventos = null;
+                eventos=null;
             }else{
                 while (rs.next()){
-                    Evento e = new Evento();
-                    e.setId(rs.getInt("id"));
-                    e.setNome(rs.getString("nome"));
-                    e.setNotaDeAprovacao(rs.getFloat("nota_aprovacao"));
-                    e.setDescricao(rs.getString("descricao"));
+                    Evento e= new Evento();
+                    e.setId(rs.getInt("id_evento"));
+                    e.setNome(rs.getString("nome_evento"));
+                    e.setNotaAprovacao(rs.getFloat("nota_de_aprovacao"));
+                    e.setDescricao(rs.getString("descricao_evento"));
+                    e.setInicioSubmissao(rs.getDate("data_inicio_submissao"));
+                    e.setFimSubmissao(rs.getDate("data_fim_submicao"));
+                    e.setInicioAvaliacao(rs.getDate("data_inicio_avaliacao"));
+                    e.setFimAvaliacao(rs.getDate("data_fim_avaliacao"));
+                    e.setInicioRecurso(rs.getDate("data_inicio_recurso"));
+                    e.setFimRecurso(rs.getDate("data_fim_recurso"));
+                    e.setResultadoRecurso(rs.getDate("data_resultado_do_recurso"));
                     e.setInstituicao(rs.getString("instituicão"));
-                
-                    Calendar calIS = Calendar.getInstance();
-                    calIS.setTime(rs.getDate("inicio_submicao"));
-                    e.setInicioSubimicao(calIS);
-                    Calendar calFS = Calendar.getInstance();
-                    calFS.setTime(rs.getDate("fim_submicao"));
-                    e.setFimSubmicao(calFS);
-                    Calendar calIA = Calendar.getInstance();
-                    calIA.setTime(rs.getDate("inicio_avaliacao"));
-                    e.setInicioAvaliacao(calIA);
-                    Calendar calFA = Calendar.getInstance();
-                    calFA.setTime(rs.getDate("fim_avaliacao"));
-                    e.setFimAvaliacao(calFA);
-                    Calendar calIR = Calendar.getInstance();
-                    calIR.setTime(rs.getDate("inicio_recurso"));
-                    e.setInicioSubimicao(calIR);
-                    Calendar calFR = Calendar.getInstance();
-                    calFR.setTime(rs.getDate("fim_recurso"));
-                    e.setInicioSubimicao(calFR);
-                
-                    AvaliadorDAO avaliadores = new AvaliadorDAO();
-                    e.setAvaliadores(avaliadores.selectIdEvento(e));
-                
-                    CompetenciaDAO comp = new CompetenciaDAO();
-                    e.setCompetencias(comp.selectIdEvento(e));
-                   
-                    
                     eventos.add(e);
                 }
                 
@@ -180,9 +158,8 @@ public class EventoDAO {
             
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
-            ConnectionFactory.closeConnection(con,stmt,rs);
         }
+            
                     
             return eventos;
         }
