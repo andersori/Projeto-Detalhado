@@ -25,17 +25,11 @@ import modelo.Evento;
  */
 public class EventoDAO {
 
-    public void Insert(Evento e) {
+    public void insert(Evento e) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
-            //id INT, nome STR, descricao STR, instituicao STR, notaDeAprovacao DOU, inicioSubmicao CAL, fimSubmicao CAL
-            //inicioAvaliacao CAL, fimAvaliacao CAL, inicioRecurso CAL, fimRecurso CAL
-            //organizador USUARIO, avaliadores USUARIOLIST, modeloDocumento ARQUIVO, competencias COMPETENCIASLIST
-            
-            //id , id_usuario_organizador INT, id_documento_modelo INT, nome STR, nota_de_aprovacao DECIMAL, descricao TEXT, 
-            //inicio_submicao D, fim_submicao D, inicio_avaliacao D, fim_avaliacao D, inicio_recurso D, fim_recurso D, instituicao STR
             stmt = con.prepareStatement("INSERT INTO evento(id_usuario_organizador, id_documento_modelo, nome, nota_aprovacao, descricao, inicio_submicao, fim_submicao, inicio_avaliacao, fim_avaliacao, inicio_recurso, fim_recurso, instituicao) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
             stmt.setInt(1, e.getOrganizador().getId());
@@ -52,14 +46,16 @@ public class EventoDAO {
             stmt.setString(12, e.getInstituicao());
             
             stmt.executeUpdate();
-            
+            //passando id do evento
+            e.setId(this.buscarIdEvento(e));
+            //cadastrando avaliadores
             UsuarioList ava = e.getAvaliadores();
             AvaliadorDAO avaliadores = new AvaliadorDAO();
             int i=0;
             while(ava.getItem(i)!=null){
                 avaliadores.insert(ava.getItem(i),e);
             }
-            
+            //cadastrando competencias
             CompetenciaList comp = e.getCompetencias();
             CompetenciaDAO competencias = new CompetenciaDAO();
             i = 0;
@@ -76,7 +72,87 @@ public class EventoDAO {
 
     }
     
-        public Evento buscarEvento(String Nome){
+    public Evento selectId(int id){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Evento e = null;
+        
+        try {
+            stmt = con.prepareStatement("SELECT * FROM evento WHERE id = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                e = new Evento();
+                e.setId(rs.getInt("id"));
+                e.setNome(rs.getString("nome"));
+                e.setNotaDeAprovacao(rs.getFloat("nota_aprovacao"));
+                e.setDescricao(rs.getString("descricao"));
+                e.setInstituicao(rs.getString("instituicão"));
+                
+                Calendar calIS = Calendar.getInstance();
+                calIS.setTime(rs.getDate("inicio_submicao"));
+                e.setInicioSubimicao(calIS);
+                Calendar calFS = Calendar.getInstance();
+                calFS.setTime(rs.getDate("fim_submicao"));
+                e.setFimSubmicao(calFS);
+                Calendar calIA = Calendar.getInstance();
+                calIA.setTime(rs.getDate("inicio_avaliacao"));
+                e.setInicioAvaliacao(calIA);
+                Calendar calFA = Calendar.getInstance();
+                calFA.setTime(rs.getDate("fim_avaliacao"));
+                e.setFimAvaliacao(calFA);
+                Calendar calIR = Calendar.getInstance();
+                calIR.setTime(rs.getDate("inicio_recurso"));
+                e.setInicioSubimicao(calIR);
+                Calendar calFR = Calendar.getInstance();
+                calFR.setTime(rs.getDate("fim_recurso"));
+                e.setInicioSubimicao(calFR);
+                
+                AvaliadorDAO avaliadores = new AvaliadorDAO();
+                e.setAvaliadores(avaliadores.selectAll());
+                
+                CompetenciaDAO comp = new CompetenciaDAO();
+                e.setCompetencias(comp.selectIdEvento(e));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+        
+        return e;
+        
+    }
+    
+    public int buscarIdEvento( Evento ev){
+            Connection con = ConnectionFactory.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            int id = 0;
+            
+        try {
+            stmt = con.prepareStatement("SELECT id FROM evento WHERE nome = ? AND descricao = ? AND instituicao = ?");
+            stmt.setString(1, ev.getNome());
+            stmt.setString(2, ev.getDescricao());
+            stmt.setString(3, ev.getInstituicao());
+            rs = stmt.executeQuery();
+            
+            id = rs.getInt("id");
+         
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+        return id;   
+        
+    }
+    
+    public Evento buscarEvento(String Nome){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             Evento e= null;
@@ -119,10 +195,7 @@ public class EventoDAO {
                 
                 CompetenciaDAO comp = new CompetenciaDAO();
                 e.setCompetencias(comp.selectIdEvento(e));
-                // falta a opção que eu passo o ID e ele Cria o Organizador e tbm a do documento.
-                
-                
-                
+                 
             }
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,7 +206,7 @@ public class EventoDAO {
             return e;
         }
         
-        public List<Evento> SelectAll(){
+    public List<Evento> SelectAll(){
             Connection con = ConnectionFactory.getConnection();
             PreparedStatement stmt = null;
             ResultSet rs = null;
