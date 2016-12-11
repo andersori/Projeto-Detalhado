@@ -12,6 +12,8 @@ import java.util.Calendar;
  * @author Anderson
  */
 public class Formacao {
+    private int idUsuario;
+    private int idAreaConhecimento;
     private String tipo;
     private String instituicao;
     private Calendar dataInicio;
@@ -47,6 +49,21 @@ public class Formacao {
 
     public void setDataTermino(Calendar dataTermino) {
         this.dataTermino = dataTermino;
+    }
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getIdAreaConhecimento() {
+        return idAreaConhecimento;
+    }
+
+    public void setIdAreaConhecimento(int idAreaConhecimento) {
+        this.idAreaConhecimento = idAreaConhecimento;
     }
     
 }

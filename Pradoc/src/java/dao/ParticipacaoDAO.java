@@ -96,6 +96,53 @@ public class ParticipacaoDAO {
         return participacoes;
             
     }
+    public Participacao selectId(int id) throws SQLException{
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        PreparedStatement stmt2 =null;
+        ResultSet rs=null;
+        ResultSet rsAv=null;
+        Participacao participacao=null;
+        
+        try{
+            stmt=con.prepareStatement("SELECT *FROM participacao WHERE id=?");
+            stmt.setInt(1, id);
+            rs=stmt.executeQuery();
+            if(rs.next()){
+                participacao=new Participacao();
+                participacao.setId(rs.getInt("id"));
+                participacao.setRevisar(rs.getBoolean("revisar"));
+                participacao.setValido(rs.getBoolean("valido"));
+                participacao.setStatus(rs.getString("status"));
+                participacao.setResultadoFinal(rs.getDouble("resultado_final"));
+                
+                ArquivoDAO arquivoDao=new ArquivoDAO();//PEGANDO O ARQUIVO PELO SEU ID
+                participacao.setArquivo(arquivoDao.selectArquivoID(rs.getInt("id_arquivo")));
+                
+                stmt2=con.prepareStatement("SELECT *FROM avaliacao WHERE id_participacao=?");//PEGANDO TODAS AS AVALIACOES
+                stmt2.setInt(1,id);
+                rsAv=stmt2.executeQuery();
+                AvaliacaoList avaliacao=new AvaliacaoList();
+                while(rsAv.next()){
+                    avaliacao.append(new Avaliacao(rsAv.getInt("id_participacao"),rsAv.getInt("id_competencia"),rsAv.getDouble("valor_obtido"),rsAv.getString("observacao")));
+                }
+                participacao.setAvaliacoes(avaliacao);
+                
+                //falta pegar o evento
+                
+                EmailParticipacaoDAO buscarEmails=new EmailParticipacaoDAO();//PEGANDO OS EMAILS DA PARTICIPAÇAO
+                participacao.setEmailsUsuarios(buscarEmails.selectALL(participacao));
+                
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(ParticipacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+            ConnectionFactory.closeConnection(con,stmt2,rsAv);
+            
+        }
+        return participacao;
+    }
     
     public void update(Participacao participacao) throws SQLException{
         Connection con = ConnectionFactory.getConnection();
