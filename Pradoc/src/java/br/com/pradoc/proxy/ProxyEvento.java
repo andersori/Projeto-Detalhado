@@ -5,7 +5,11 @@
  */
 package br.com.pradoc.proxy;
 
+import dao.ArquivoDAO;
 import dao.EventoDAO;
+import dao.ParticipacaoDAO;
+import java.util.ArrayList;
+import java.util.List;
 import modelo.Arquivo;
 import modelo.Competencia;
 import modelo.Evento;
@@ -27,42 +31,45 @@ public class ProxyEvento implements IEvento{
 
     @Override
     public void definirConceito(Competencia conceito, Participacao part, double valor, String observacao) {
-        //Se tiver permição
-        if(true){
-            evento.definirConceito(conceito, part, valor, observacao);            
-        }
-        else{
-            return;
+        for(int i=0;i<part.getEvento().getAvaliadores().size();i++){
+            if(part.getEvento().getAvaliadores().getItem(i).getId()==usuario.getId())
+                evento.definirConceito(conceito, part, valor, observacao);                        
         }
     }
 
     @Override
     public String baixarArquivo(int id_arquivo) {
         //Se tiver permição
-        if(true){
+        ArquivoDAO arq=new ArquivoDAO();
+        if(usuario.getId()==arq.selectArquivoID(id_arquivo).getId_usuario())
             return evento.baixarArquivo(id_arquivo);
+        
+        ParticipacaoDAO part=new ParticipacaoDAO();
+        List<Participacao> participacoes=part.selectAll();
+        
+        for(int i=0;i<participacoes.size();i++){
+            for(int j=0;j<participacoes.get(i).getEvento().getAvaliadores().size();j++){
+                if((participacoes.get(i).getEvento().getAvaliadores().getItem(j).getId()==usuario.getId())&&(participacoes.get(i).getArquivo().getId()==id_arquivo))
+                    return evento.baixarArquivo(id_arquivo);
+            }
+            if((participacoes.get(i).getEvento().getOrganizador().getId()==usuario.getId())&&(participacoes.get(i).getArquivo().getId()==id_arquivo))
+                return evento.baixarArquivo(id_arquivo);
         }
-        else{
-            return null;
-        }
+        return null;        
     }
 
     @Override
     public boolean excluir() {
-        //Se tiver permição
-        if(true){
+        if(usuario.getId()==evento.getOrganizador().getId())
             return evento.excluir();
-            
-        }
-        else{
+        else
             return false;
-        }
     }
 
     @Override
     public boolean valiadarParticipacao(int idParticipacao, boolean isValido) {
         //Se tiver permição
-        if(true){
+        if(usuario.getId()==evento.getOrganizador().getId()){
             return evento.valiadarParticipacao(idParticipacao, isValido);
         }
         else{
@@ -73,7 +80,7 @@ public class ProxyEvento implements IEvento{
     @Override
     public boolean adicionarAvaliador(Usuario user) {
         //Se tiver permição
-        if(true){
+        if(usuario.getId()==evento.getOrganizador().getId()){
             return evento.adicionarAvaliador(user);
         }
         else{
@@ -84,7 +91,7 @@ public class ProxyEvento implements IEvento{
     @Override
     public boolean removerAvaliador(Usuario user) {
         //Se tiver permição
-        if(true){
+        if(usuario.getId()==evento.getOrganizador().getId()){
             return evento.removerAvaliador(user);
         }
         else{
@@ -95,7 +102,7 @@ public class ProxyEvento implements IEvento{
     @Override
     public boolean anexarModelo(Arquivo arq) {
         //Se tiver permição
-        if(true){
+        if(usuario.getId()==evento.getOrganizador().getId()){
             return evento.anexarModelo(arq);
         }
         else{
@@ -106,7 +113,7 @@ public class ProxyEvento implements IEvento{
     @Override
     public boolean distribuirArquivos() {
         //Se tiver permição
-        if(true){
+        if(usuario.getId()==evento.getOrganizador().getId()){
             return evento.distribuirArquivos();
         }
         else{
@@ -117,12 +124,11 @@ public class ProxyEvento implements IEvento{
     @Override
     public boolean requisiatarRevisao(Participacao part) {
         //Se tiver permição
-        if(true){
-            return evento.requisiatarRevisao(part);
+        for(int i=0;i<part.getEmailsUsuarios().size();i++){
+            if(usuario.getEmail().equals(part.getEmailsUsuarios().get(i)))
+                return evento.requisiatarRevisao(part);
         }
-        else{
-            return false;
-        }
+        return false;
     }
     
     
