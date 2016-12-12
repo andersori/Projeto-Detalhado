@@ -6,6 +6,8 @@
 package br.com.pradoc.proxy;
 
 import dao.EventoDAO;
+import dao.ParticipacaoDAO;
+import dao.ResponsavelAvaliacaoDAO;
 import modelo.Arquivo;
 import modelo.Competencia;
 import modelo.Evento;
@@ -27,8 +29,9 @@ public class ProxyEvento implements IEvento{
 
     @Override
     public void definirConceito(Competencia conceito, Participacao part, double valor, String observacao) {
-        //Se tiver permição
-        if(true){
+        ResponsavelAvaliacaoDAO dao = new ResponsavelAvaliacaoDAO();
+        
+        if(dao.isResponsavel(usuario, part)){
             evento.definirConceito(conceito, part, valor, observacao);            
         }
         else{
@@ -37,10 +40,10 @@ public class ProxyEvento implements IEvento{
     }
 
     @Override
-    public String baixarArquivo(int id_arquivo) {
-        //Se tiver permição
+    public String baixarArquivo() {
+        
         if(true){
-            return evento.baixarArquivo(id_arquivo);
+            return evento.baixarArquivo();
         }
         else{
             return null;

@@ -16,7 +16,7 @@ import modelo.Usuario;
  */
 public interface IEvento {
     public void definirConceito(Competencia conceito, Participacao part, double valor, String observacao);
-    public String baixarArquivo(int id_arquivo);
+    public String baixarArquivo();
     public boolean excluir();
     public boolean valiadarParticipacao(int idParticipacao, boolean isValido);
     public boolean adicionarAvaliador(Usuario user);
