@@ -5,17 +5,16 @@
  */
 package br.com.pradoc.proxy;
 
-import dao.ArquivoDAO;
-import dao.EventoDAO;
-import dao.ParticipacaoDAO;
-import java.util.ArrayList;
-import java.util.List;
-import dao.ResponsavelAvaliacaoDAO;
-import modelo.Arquivo;
-import modelo.Competencia;
-import modelo.Evento;
-import modelo.Participacao;
-import modelo.Usuario;
+import br.com.pradoc.dao.ArquivoDAO;
+import br.com.pradoc.dao.ParticipacaoDAO;
+import br.com.pradoc.dao.ResponsavelAvaliacaoDAO;
+import br.com.pradoc.iterators.ParticipacaoList;
+import br.com.pradoc.modelo.Arquivo;
+import br.com.pradoc.modelo.Competencia;
+import br.com.pradoc.modelo.Evento;
+import br.com.pradoc.modelo.Participacao;
+import br.com.pradoc.modelo.Usuario;
+import java.util.Iterator;
 
 /**
  *
@@ -33,7 +32,7 @@ public class ProxyEvento implements IEvento{
     @Override
     public void definirConceito(Competencia conceito, Participacao part, double valor, String observacao) {
                    
-         ResponsavelAvaliacaoDAO dao = new ResponsavelAvaliacaoDAO();
+        ResponsavelAvaliacaoDAO dao = new ResponsavelAvaliacaoDAO();
         
         if(dao.isResponsavel(usuario, part)){
             evento.definirConceito(conceito, part, valor, observacao);            
@@ -77,23 +76,31 @@ public class ProxyEvento implements IEvento{
     }   
 
     @Override
-    public String baixarArquivo(int id_arquivo){
+    public String baixarArquivo(int idArquivo){
         //Se tiver permição
         ArquivoDAO arq=new ArquivoDAO();
-        if(usuario.getId()==arq.selectArquivoID(id_arquivo).getId_usuario())
-            return evento.baixarArquivo(id_arquivo);
+        if(usuario.getId()==arq.selectArquivoID(idArquivo).getId_usuario())
+            return evento.baixarArquivo(idArquivo);
         
         ParticipacaoDAO part=new ParticipacaoDAO();
-        List<Participacao> participacoes=part.selectAll();
+        ParticipacaoList participacoes = part.selectAll();
+        Iterator iPart = participacoes.crateIterator();
         
-        for(int i=0;i<participacoes.size();i++){
-            for(int j=0;j<participacoes.get(i).getEvento().getAvaliadores().size();j++){
-                if((participacoes.get(i).getEvento().getAvaliadores().getItem(j).getId()==usuario.getId())&&(participacoes.get(i).getArquivo().getId()==id_arquivo))
-                    return evento.baixarArquivo(id_arquivo);
+        while(iPart.hasNext()){
+            Participacao p = (Participacao) iPart.next();
+            Iterator iAval = p.getEvento().getAvaliadores().crateIterator();
+            
+            while(iAval.hasNext()){
+                Usuario av = (Usuario) iAval.next();
+                if(av.getId() == usuario.getId() && p.getArquivo().getId() == idArquivo){
+                    return evento.baixarArquivo(idArquivo);
+                }
             }
-            if((participacoes.get(i).getEvento().getOrganizador().getId()==usuario.getId())&&(participacoes.get(i).getArquivo().getId()==id_arquivo))
-                return evento.baixarArquivo(id_arquivo);
+            if(p.getEvento().getOrganizador().getId() == usuario.getId() && p.getArquivo().getId() == idArquivo){
+                return evento.baixarArquivo(idArquivo);
+            }
         }
+        
         return null;        
 
     }

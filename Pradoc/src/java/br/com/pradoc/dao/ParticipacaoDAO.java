@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package br.com.pradoc.dao;
 
 import br.com.pradoc.iterators.AvaliacaoList;
+import br.com.pradoc.iterators.ParticipacaoList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.Avaliacao;
-import modelo.Participacao;
+import br.com.pradoc.modelo.Avaliacao;
+import br.com.pradoc.modelo.Participacao;
 
 /**
  *
@@ -43,11 +44,11 @@ public class ParticipacaoDAO {
         }
     } 
     
-    public List<Participacao> selectAll(){
+    public ParticipacaoList selectAll(){
         ResultSet rs=null;
         ResultSet rsEmails=null;
         ResultSet rsAv=null;
-        List<Participacao> participacoes = new ArrayList<>();
+        ParticipacaoList participacoes = new ParticipacaoList();
         Connection con= ConnectionFactory.getConnection();
         PreparedStatement stmt=null;
         PreparedStatement stmt2=null;
@@ -84,7 +85,7 @@ public class ParticipacaoDAO {
                 EmailParticipacaoDAO buscarEmails=new EmailParticipacaoDAO();//PEGANDO OS EMAILS DA PARTICIPAÇAO
                 retorno.setEmailsUsuarios(buscarEmails.selectALL(retorno));
                 
-                participacoes.add(retorno);
+                participacoes.append(retorno);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ParticipacaoDAO.class.getName()).log(Level.SEVERE, null, ex);

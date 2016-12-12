@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package br.com.pradoc.dao;
 
+import br.com.pradoc.iterators.FormacaoList;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.Formacao;
+import br.com.pradoc.modelo.Formacao;
 
 /**
  *
@@ -22,7 +23,7 @@ import modelo.Formacao;
  */
 public class FormacaoDAO {
     
-    public void insert(Formacao formacao) throws SQLException{
+    public void insert(Formacao formacao){
         
         Connection con = ConnectionFactory.getConnection();        
         PreparedStatement stmt = null;
@@ -34,7 +35,7 @@ public class FormacaoDAO {
             stmt.setString(3, formacao.getTipo());
             stmt.setString(4, formacao.getInstituicao());
             stmt.setDate(5,(Date) formacao.getDataInicio().getTime());//PEGUEI ESSA LÓGICA PELO EDUARDO
-           stmt.setDate(6, (Date) formacao.getDataTermino().getTime());
+            stmt.setDate(6, (Date) formacao.getDataTermino().getTime());
            
            stmt.executeUpdate();
         }catch(SQLException ex){
@@ -43,7 +44,7 @@ public class FormacaoDAO {
             ConnectionFactory.closeConnection(con, stmt);
             }        
     }
-    public void delete(Formacao formacao) throws SQLException{
+    public void delete(Formacao formacao){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         
@@ -58,7 +59,7 @@ public class FormacaoDAO {
             ConnectionFactory.closeConnection(con, stmt);
             }         
     }
-   public void update(Formacao formacao) throws SQLException{
+   public void update(Formacao formacao){
        Connection con = ConnectionFactory.getConnection();
        PreparedStatement stmt = null;
        
@@ -79,12 +80,12 @@ public class FormacaoDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
    }
-   public ArrayList<Formacao> selectAll() throws SQLException{
+   public FormacaoList selectAll(){
        Connection con = ConnectionFactory.getConnection();
        PreparedStatement stmt = null;
        ResultSet rs=null;
        
-       ArrayList<Formacao> retorno=new ArrayList<>();
+       FormacaoList retorno = new FormacaoList();
        try{
            stmt=con.prepareStatement("SELECT *FROM formacao");
            rs=stmt.executeQuery();
@@ -103,7 +104,7 @@ public class FormacaoDAO {
                c.setTime(rs.getDate("data_termino"));
                temp.setDataTermino(c1);
                
-               retorno.add(temp);
+               retorno.append(temp);
            }
        }catch (SQLException ex) {
             Logger.getLogger(Formacao.class.getName()).log(Level.SEVERE, null, ex);

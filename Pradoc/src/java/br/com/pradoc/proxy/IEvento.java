@@ -5,10 +5,10 @@
  */
 package br.com.pradoc.proxy;
 
-import modelo.Arquivo;
-import modelo.Competencia;
-import modelo.Participacao;
-import modelo.Usuario;
+import br.com.pradoc.modelo.Arquivo;
+import br.com.pradoc.modelo.Competencia;
+import br.com.pradoc.modelo.Participacao;
+import br.com.pradoc.modelo.Usuario;
 
 /**
  *

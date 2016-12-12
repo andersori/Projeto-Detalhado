@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package br.com.pradoc.dao;
 
 import br.com.pradoc.iterators.AvaliacaoList;
 import java.sql.Connection;
-import modelo.Avaliacao;
+import br.com.pradoc.modelo.Avaliacao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

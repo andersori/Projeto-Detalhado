@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package br.com.pradoc.modelo;
 
 import br.com.pradoc.iterators.CompetenciaList;
 import br.com.pradoc.iterators.UsuarioList;
 import br.com.pradoc.proxy.IEvento;
-import dao.ArquivoDAO;
-import dao.AvaliacaoDAO;
-import dao.AvaliadorDAO;
-import dao.EmailParticipacaoDAO;
-import dao.EventoDAO;
-import dao.ParticipacaoDAO;
+import br.com.pradoc.dao.ArquivoDAO;
+import br.com.pradoc.dao.AvaliacaoDAO;
+import br.com.pradoc.dao.AvaliadorDAO;
+import br.com.pradoc.dao.EmailParticipacaoDAO;
+import br.com.pradoc.dao.EventoDAO;
+import br.com.pradoc.dao.ParticipacaoDAO;
 import java.util.Calendar;
 
 /**

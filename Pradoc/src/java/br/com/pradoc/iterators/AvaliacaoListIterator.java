@@ -7,13 +7,13 @@ package br.com.pradoc.iterators;
 
 import java.util.Iterator;
 import java.util.List;
-import modelo.Avaliacao;
+import br.com.pradoc.modelo.Avaliacao;
 
 /**
  *
  * @author Anderson
  */
-public class AvaliacaoListIterator implements Iterator<Object>{
+public class AvaliacaoListIterator implements Iterator{
     private List<Avaliacao> lista;
     private int posicao;
 

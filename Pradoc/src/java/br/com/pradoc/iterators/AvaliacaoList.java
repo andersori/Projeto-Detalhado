@@ -8,7 +8,7 @@ package br.com.pradoc.iterators;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import modelo.Avaliacao;
+import br.com.pradoc.modelo.Avaliacao;
 
 /**
  *

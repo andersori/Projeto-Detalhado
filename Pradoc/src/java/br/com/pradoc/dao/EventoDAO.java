@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package br.com.pradoc.dao;
 
 import br.com.pradoc.iterators.CompetenciaList;
 import br.com.pradoc.iterators.UsuarioList;
@@ -17,7 +17,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.Evento;
+import br.com.pradoc.modelo.Evento;
 
 /**
  *
@@ -49,10 +49,10 @@ public class EventoDAO {
             //passando id do evento
             e.setId(this.buscarIdEvento(e));
             //cadastrando avaliadores
-            UsuarioList ava = e.getAvaliadores();
+            /*UsuarioList ava = e.getAvaliadores();
             AvaliadorDAO avaliadores = new AvaliadorDAO();
             int i=0;
-            while(ava.getItem(i)!=null){
+            while(ava.getItem(i) != null){
                 avaliadores.insert(ava.getItem(i),e);
             }
             //cadastrando competencias
@@ -62,7 +62,7 @@ public class EventoDAO {
             while(comp.getItem(i) != null){
                 competencias.insert(comp.getItem(i), e);
             }
-            
+            */
             
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -213,7 +213,7 @@ public class EventoDAO {
             List<Evento> eventos = new ArrayList<>();
             
         try {
-            stmt=con.prepareStatement("SELECT * FROM evento GROUP BY id_evento DESC");
+            stmt=con.prepareStatement("SELECT * FROM evento GROUP BY id DESC");
             rs = stmt.executeQuery();
             if(rs == null){
                 eventos=null;

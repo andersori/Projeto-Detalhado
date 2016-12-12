@@ -9,7 +9,7 @@ import com.sun.org.apache.bcel.internal.generic.RETURN;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import modelo.Usuario;
+import br.com.pradoc.modelo.Usuario;
 
 /**
  *

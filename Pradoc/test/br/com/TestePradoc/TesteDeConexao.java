@@ -5,11 +5,11 @@
  */
 package br.com.TestePradoc;
 import br.com.pradoc.iterators.UsuarioList;
-import dao.ConnectionFactory;
-import dao.UsuarioDAO;
+import br.com.pradoc.dao.ConnectionFactory;
+import br.com.pradoc.dao.UsuarioDAO;
 import java.sql.Connection;
 import java.util.Iterator;
-import modelo.Usuario;
+import br.com.pradoc.modelo.Usuario;
 
 /**
  *

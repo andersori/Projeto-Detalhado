@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package br.com.pradoc.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.Evento;
+import br.com.pradoc.modelo.Evento;
 
 /**
  *
@@ -86,8 +86,7 @@ public class AreaConhecimentoDAO {
             rs = stmt.executeQuery();
             
             while(rs.next()){
-                String area = new String();
-                area = rs.getString("nome");
+                String area = rs.getString("nome");
                                 
                 areas.add(area);
             }
