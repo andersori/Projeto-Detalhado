@@ -47,7 +47,7 @@ public class EmailParticipacaoDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    
+        
     public List<String> selectALL(){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

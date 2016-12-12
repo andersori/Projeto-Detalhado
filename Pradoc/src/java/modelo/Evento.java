@@ -174,7 +174,7 @@ public class Evento implements IEvento{
     @Override   /*OK*/
     public String baixarArquivo(int id_arquivo) {
         ArquivoDAO dao = new ArquivoDAO();
-        Arquivo arq = dao.selectArquivoID(id_arquivo);
+        Arquivo arq = dao.selectIdUsuario(this.organizador);
         
         return arq.getCaminho();
     }
